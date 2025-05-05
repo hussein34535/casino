@@ -1,107 +1,50 @@
-name: Flutter Build and Upload iOS IPA
+name: Flutter Build iOS IPA (Basic Build) # اسم الـ Workflow
 
 on:
   push:
     branches:
-      - main
-  workflow_dispatch
+      - main # هيشتغل لما تعمل Push على main
+  workflow_dispatch # هيشتغل يدوي
 
 jobs:
   build:
-    runs-on: macos-latest
-    permissions:
-      contents: write
+    runs-on: macos-latest # لازم يشتغل على Mac عشان يبني iOS
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repository # سحب كود المشروع
         uses: actions/checkout@v3
 
-      - name: Install the Apple certificate and provisioning profile
-        env:
-          BUILD_CERTIFICATE_BASE64: ${{ secrets.APPSTORE_CERT_BASE64 }}
-          P12_PASSWORD: ${{ secrets.APPSTORE_CERT_PASSWORD }}
-          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.MOBILEPROVISION_BASE64 }}
-          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-        run: |
-          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
-          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
-          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+      # تم إزالة الخطوات المتعلقة بتثبيت الشهادات والبروفيجن بروفايل والـ Secrets
 
-          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode --output $CERTIFICATE_PATH
-          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode --output $PP_PATH
-
-          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-
-          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-          security list-keychain -d user -s $KEYCHAIN_PATH
-
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-
-      - name: Install yq
+      - name: Install yq # تثبيت أداة yq لقراءة ملفات YAML
         uses: mikefarah/yq@v4.42.1
 
-      - name: Get pubspec version
+      - name: Get pubspec version # استخلاص رقم الإصدار من pubspec.yaml
         id: get_flutter_app_version
         run: |
-          VERSION=$(yq .version | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+' pubspec.yaml | head -n 1)
-          echo "TAG_VERSION=$VERSION" >> $GITHUB_OUTPUT
+          VERSION=$(yq '.version' pubspec.yaml | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+' | head -n 1)
+          echo "BUILD_VERSION=$VERSION" >> $GITHUB_OUTPUT # حفظ رقم الإصدار كـ output
 
-      - name: Create git tag and push
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          TAG_NAME="v${{ steps.get_flutter_app_version.outputs.TAG_VERSION }}"
-          git tag "$TAG_NAME"
-          git push origin "$TAG_NAME"
-
-      - name: Install Flutter
+      - name: Install Flutter # تثبيت Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'main'
+          channel: 'stable' # استخدام قناة Stable
 
-      - name: Get Flutter dependencies
+      - name: Get Flutter dependencies # جلب الـ Packages
         run: flutter pub get
 
-      - name: Building IPA
+      - name: Building IPA # <<< محاولة بناء ملف الـ IPA - الخطوة دي هتتطلب Code Signing اللي مش متوفر هنا بشكل سليم >>>
         run: flutter build ipa --release --export-options-plist=ios/Runner/ExportOptions.plist
+        # NOTE: This step is highly likely to fail due to missing code signing identities/provisioning profiles,
+        # as they are NOT being installed by this simplified workflow.
+        # If it doesn't fail outright, the resulting IPA will likely be unsigned or invalid.
 
-      - name: Save IPA to Artifacts
+
+      - name: Save potential IPA artifact # حفظ أي ملف IPA قد ينتج عن خطوة البناء (قد يكون غير كامل أو غير صالح)
         uses: actions/upload-artifact@v3
         with:
-          name: release-ipa
-          path: build/ios/ipa/*.ipa
+          name: build-output-ipa # اسم الـ Artifact
+          path: build/ios/ipa/*.ipa # المسار المتوقع لملف الـ IPA
 
-      - name: Create Github Release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/ios/ipa/*.ipa"
-          tag: "v${{ steps.get_flutter_app_version.outputs.TAG_VERSION }}-ios"
-
-      - name: Clean up keychain and provisioning profile
-        if: ${{ always() }}
-        run: |
-          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
-          rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
-
-  release:
-    name: Release ipa to Firebase
-    needs: [ build ]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Get release-ipa from artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: release-ipa
-
-      - name: Upload artifact to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
-        with:
-          appId: ${{ secrets.FIREBASE_IOS_APP_ID }}
-          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
-          groups: ios-developers
-          file: release-ipa/*.ipa
+      # تم إزالة خطوة التنظيف (لأن مفيش حاجة حساسة تم تثبيتها في هذا الـ Workflow)
+      # تم إزالة الـ Job الخاص برفع Firebase
