@@ -14,10 +14,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Steps for installing certificates and provisioning profiles are removed as requested.
-
-      - name: Install yq
-        uses: mikefarah/yq@v4.42.1
+      - name: Install yq (manual for macOS)
+        run: brew install yq
 
       - name: Get pubspec version
         id: get_flutter_app_version
@@ -35,14 +33,9 @@ jobs:
 
       - name: Building IPA
         run: flutter build ipa --release --export-options-plist=ios/Runner/ExportOptions.plist
-        # NOTE: This step is highly likely to fail due to missing code signing identities/provisioning profiles.
-        # If it doesn't fail outright, the resulting IPA will likely be unsigned or invalid.
 
       - name: Save potential IPA artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-output-ipa
           path: build/ios/ipa/*.ipa
-
-      # Cleanup step is removed.
-      # Firebase release job is removed.
