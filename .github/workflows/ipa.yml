@@ -1,50 +1,50 @@
-name: Flutter Build iOS IPA (Basic Build) # اسم الـ Workflow
+name: Flutter Build iOS IPA (Basic Build) # اسم الـ Workflow اللي هيظهر في GitHub Actions
 
-on:
-  push:
+on: # امتى الـ Workflow ده هيشتغل؟
+  push: # هيشتغل لما يحصل push
     branches:
-      - main # هيشتغل لما تعمل Push على main
-  workflow_dispatch # هيشتغل يدوي
+      - main # على فرع الـ main بس
+  workflow_dispatch # ده بيسمحلك تشغله يدوي من صفحة GitHub Actions
 
-jobs:
-  build:
-    runs-on: macos-latest # لازم يشتغل على Mac عشان يبني iOS
+jobs: # <<<<< بداية تعريف الـ Jobs اللي الـ Workflow ده هيعملها. لازم تبدأ من أول السطر.
+  build: # اسم أول Job وهو هنا "build"
+    runs-on: macos-latest # Job دي هتشتغل على جهاز بيئة Mac عشان نقدر نعمل بيلد iOS
 
-    steps:
-      - name: Checkout repository # سحب كود المشروع
-        uses: actions/checkout@v3
+    steps: # الخطوات اللي Job اللي اسمها "build" هتعملها بالترتيب
+      - name: Checkout repository # خطوة سحب كود مشروعك من الريبو
+        uses: actions/checkout@v3 # بنستخدم Action جاهزة بتعمل Checkout
 
-      # تم إزالة الخطوات المتعلقة بتثبيت الشهادات والبروفيجن بروفايل والـ Secrets
+      # تم إزالة الخطوات المتعلقة بتثبيت الشهادات والبروفيجن بروفايل والـ Secrets بناءً على طلبك
 
-      - name: Install yq # تثبيت أداة yq لقراءة ملفات YAML
-        uses: mikefarah/yq@v4.42.1
+      - name: Install yq # تثبيت أداة اسمها yq مفيدة لقراءة ملفات YAML
+        uses: mikefarah/yq@v4.42.1 # بنستخدم Action جاهزة لتثبيتها
 
-      - name: Get pubspec version # استخلاص رقم الإصدار من pubspec.yaml
-        id: get_flutter_app_version
-        run: |
-          VERSION=$(yq '.version' pubspec.yaml | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+' | head -n 1)
-          echo "BUILD_VERSION=$VERSION" >> $GITHUB_OUTPUT # حفظ رقم الإصدار كـ output
+      - name: Get pubspec version # خطوة استخلاص رقم إصدار التطبيق من ملف pubspec.yaml بتاع Flutter
+        id: get_flutter_app_version # بندي الخطوة دي ID عشان نقدر نستخدم ناتجها بعد كده
+        run: | # دي أوامر Terminal هتتنفذ
+          VERSION=$(yq '.version' pubspec.yaml | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+' | head -n 1) # بنقرا الـ version ونستخلص الأرقام
+          echo "BUILD_VERSION=$VERSION" >> $GITHUB_OUTPUT # بنحفظ رقم الإصدار كـ output للخطوة دي
 
-      - name: Install Flutter # تثبيت Flutter
-        uses: subosito/flutter-action@v2
+      - name: Install Flutter # خطوة تثبيت بيئة Flutter اللي هنستخدمها
+        uses: subosito/flutter-action@v2 # Action جاهزة لتثبيت Flutter
         with:
-          channel: 'stable' # استخدام قناة Stable
+          channel: 'stable' # بنختار قناة Stable من Flutter
 
-      - name: Get Flutter dependencies # جلب الـ Packages
-        run: flutter pub get
+      - name: Get Flutter dependencies # خطوة جلب المكتبات (Packages) اللي المشروع محتاجها
+        run: flutter pub get # تنفيذ أمر flutter pub get
 
       - name: Building IPA # <<< محاولة بناء ملف الـ IPA - الخطوة دي هتتطلب Code Signing اللي مش متوفر هنا بشكل سليم >>>
-        run: flutter build ipa --release --export-options-plist=ios/Runner/ExportOptions.plist
+        run: flutter build ipa --release --export-options-plist=ios/Runner/ExportOptions.plist # تنفيذ أمر بناء الـ IPA
         # NOTE: This step is highly likely to fail due to missing code signing identities/provisioning profiles,
         # as they are NOT being installed by this simplified workflow.
         # If it doesn't fail outright, the resulting IPA will likely be unsigned or invalid.
+        # التنبيه ده بيقول إن الخطوة دي غالباً هتفشل عشان مفيش Signing Certificates/Profiles متركبة.
 
-
-      - name: Save potential IPA artifact # حفظ أي ملف IPA قد ينتج عن خطوة البناء (قد يكون غير كامل أو غير صالح)
-        uses: actions/upload-artifact@v3
+      - name: Save potential IPA artifact # خطوة حفظ أي ملف IPA قد ينتج عن خطوة البناء دي كـ Artifact
+        uses: actions/upload-artifact@v3 # Action جاهزة لحفظ الـ Artifacts
         with:
-          name: build-output-ipa # اسم الـ Artifact
-          path: build/ios/ipa/*.ipa # المسار المتوقع لملف الـ IPA
+          name: build-output-ipa # اسم الـ Artifact اللي هيظهر
+          path: build/ios/ipa/*.ipa # المسار اللي بندور فيه على ملف الـ IPA بعد البناء
 
-      # تم إزالة خطوة التنظيف (لأن مفيش حاجة حساسة تم تثبيتها في هذا الـ Workflow)
-      # تم إزالة الـ Job الخاص برفع Firebase
+      # تم إزالة خطوة التنظيف لأن مفيش حاجة حساسة تم تثبيتها في هذا الـ Workflow المبسط
+      # تم إزالة الـ Job الخاص برفع Firebase لأنه بيحتاج Secrets خاصة بيه
