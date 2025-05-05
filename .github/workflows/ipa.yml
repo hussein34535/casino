@@ -1,4 +1,4 @@
-name: Flutter Build iOS IPA (Basic Build)
+name: Flutter Build iOS (No IPA)
 
 on:
   push:
@@ -31,11 +31,11 @@ jobs:
       - name: Get Flutter dependencies
         run: flutter pub get
 
-      - name: Building IPA
-        run: flutter build ipa --release --export-options-plist=ios/Runner/ExportOptions.plist
+      - name: Building iOS
+        run: flutter build ios --release
 
-      - name: Save potential IPA artifact
+      - name: Save build folder
         uses: actions/upload-artifact@v4
         with:
-          name: build-output-ipa
-          path: build/ios/ipa/*.ipa
+          name: build-output-ios
+          path: build/ios/iphoneos
