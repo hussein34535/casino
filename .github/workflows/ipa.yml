@@ -39,7 +39,7 @@ jobs:
         # If it doesn't fail outright, the resulting IPA will likely be unsigned or invalid.
 
       - name: Save potential IPA artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-output-ipa
           path: build/ios/ipa/*.ipa
