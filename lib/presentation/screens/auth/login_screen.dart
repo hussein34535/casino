@@ -50,7 +50,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       await ref.read(authRepositoryProvider).signInWithGoogle();
       if (mounted) context.go('/home');
     } catch (e) {
-      if (mounted) showXoSnack(context, 'فشل تسجيل الدخول عبر Google', error: true);
+      debugPrint('Google sign-in error: $e');
+      if (mounted) showXoSnack(context, 'فشل تسجيل الدخول عبر Google ($e)', error: true);
     }
     ref.read(authLoadingProvider.notifier).state = false;
   }
