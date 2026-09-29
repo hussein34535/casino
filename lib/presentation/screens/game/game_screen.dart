@@ -348,9 +348,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                                       children: [
                                         const Icon(Icons.timer, size: 36, color: ComicColors.red),
                                         const SizedBox(width: 8),
-                                        Text('$_answerTimerSeconds', style: const TextStyle(fontWeight: FontWeight.w900, color: ComicColors.red, fontSize: 40))
-                                          .animate(onPlay: (c) => c.repeat(reverse: true))
-                                          .scale(begin: const Offset(1,1), end: const Offset(1.1, 1.1)),
+                                        Text('$_answerTimerSeconds', style: const TextStyle(fontWeight: FontWeight.w900, color: ComicColors.red, fontSize: 40)),
                                       ],
                                     ),
                                     const SizedBox(height: 8),
@@ -509,7 +507,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                                                 Text('$_answerTimerSeconds', style: const TextStyle(fontWeight: FontWeight.w900, color: Colors.white, fontSize: 16)),
                                               ],
                                             ),
-                                          ).animate(onPlay: (c) => c.repeat(reverse: true)).scale(begin: const Offset(1,1), end: const Offset(1.1,1.1)),
+                                          ),
                                         ],
                                       ],
                                     ),
@@ -612,7 +610,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                                     ? (isMultiplayer 
                                         ? const Icon(Icons.lock, color: Colors.white, size: 28)
                                         : Text('$_buzzerCooldown', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 24)))
-                                    : const Icon(Icons.notifications_active_rounded, color: Colors.white, size: 32).animate(onPlay: (c) => c.repeat()).shake(),
+                                    : const Icon(Icons.notifications_active_rounded, color: Colors.white, size: 32),
                                 ),
                               ),
                             ),
