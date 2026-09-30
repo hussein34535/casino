@@ -23,6 +23,7 @@ class CreateRoomScreen extends ConsumerStatefulWidget {
 class _CreateRoomScreenState extends ConsumerState<CreateRoomScreen> {
   final Set<String> _selectedCategories = {'trivia'};
   int _maxPlayers = 10;
+  bool _isPublic = true;
   bool _isCreating = false;
 
   static const _playerOptions = [2, 4, 8, 10, 16];
@@ -34,6 +35,7 @@ class _CreateRoomScreenState extends ConsumerState<CreateRoomScreen> {
       await ref.read(roomNotifierProvider.notifier).createRoom(
             categories: _selectedCategories.toList(),
             maxPlayers: _maxPlayers,
+            isPublic: _isPublic,
           );
       if (mounted) context.push('/waiting-room');
     } catch (e) {
@@ -123,6 +125,32 @@ class _CreateRoomScreenState extends ConsumerState<CreateRoomScreen> {
                 }).toList(),
               ),
             ),
+            const SizedBox(height: 20),
+            Text('ظهور الغرفة', style: XoDesign.h2.copyWith(color: Colors.white)),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: _VisibilityOption(
+                    selected: _isPublic,
+                    icon: 'users',
+                    title: 'عامة',
+                    subtitle: 'تظهر في البحث',
+                    onTap: () => setState(() => _isPublic = true),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: _VisibilityOption(
+                    selected: !_isPublic,
+                    icon: 'lock',
+                    title: 'خاصة',
+                    subtitle: 'بالكود فقط',
+                    onTap: () => setState(() => _isPublic = false),
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(height: 28),
             XoButton(
               label: 'إنشاء الغرفة',
@@ -142,6 +170,73 @@ class _CreateRoomScreenState extends ConsumerState<CreateRoomScreen> {
               ),
             ),
             const SizedBox(height: 16),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _VisibilityOption extends StatelessWidget {
+  final bool selected;
+  final String icon;
+  final String title;
+  final String subtitle;
+  final VoidCallback onTap;
+
+  const _VisibilityOption({
+    required this.selected,
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        HapticFeedback.selectionClick();
+        onTap();
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        decoration: BoxDecoration(
+          gradient: selected ? XoDesign.goldGradient : null,
+          color: selected ? null : XoDesign.glass,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(
+            color: selected
+                ? Colors.transparent
+                : Colors.white.withValues(alpha: 0.14),
+          ),
+        ),
+        child: Row(
+          children: [
+            XoIcon(icon,
+                size: 22,
+                color: selected ? XoDesign.navy900 : Colors.white70),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 15,
+                          color: selected ? XoDesign.navy900 : Colors.white)),
+                  Text(subtitle,
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: selected
+                              ? XoDesign.navy900.withValues(alpha: 0.7)
+                              : Colors.white54)),
+                ],
+              ),
+            ),
           ],
         ),
       ),
