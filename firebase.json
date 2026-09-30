@@ -1,5 +1,1 @@
-{
-  "database": {
-    "rules": "database.rules.json"
-  }
-}
+{"database":{"rules":"database.rules.json"},"firestore":{"rules":"firestore.rules","indexes":"firestore.indexes.json"},"flutter":{"platforms":{"android":{"default":{"projectId":"casino-be258","appId":"1:284055178339:android:fd8bc8c731002e8e833c56","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"casino-be258","configurations":{"android":"1:284055178339:android:fd8bc8c731002e8e833c56","web":"1:284055178339:web:e31f63376e0591c2833c56"}}}}}}

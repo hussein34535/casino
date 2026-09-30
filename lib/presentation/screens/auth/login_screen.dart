@@ -51,7 +51,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       if (mounted) context.go('/home');
     } catch (e) {
       debugPrint('Google sign-in error: $e');
-      if (mounted) showXoSnack(context, 'فشل تسجيل الدخول عبر Google ($e)', error: true);
+      if (mounted) {
+        showXoSnack(context, 'فشل تسجيل الدخول عبر Google', error: true);
+      }
     }
     ref.read(authLoadingProvider.notifier).state = false;
   }
@@ -68,6 +70,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           padding: const EdgeInsets.all(20),
           child: Form(
             key: _formKey,
+            // TEMP-DIAG: entrance animation removed to test hit-testing.
             child: XoCard(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -154,21 +157,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ],
                   ),
                   const SizedBox(height: 18),
-                  XoCard(
-                    onTap: isLoading ? null : _signInWithGoogle,
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset('assets/icons/google.svg', width: 24, height: 24),
-                        const SizedBox(width: 10),
-                        const Text('دخول باستخدام Google',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w800,
-                                color: XoDesign.ink)),
-                      ],
-                    ),
+                  XoButton.white(
+                    label: 'دخول باستخدام Google',
+                    leading: SvgPicture.asset(
+                        'assets/icons/google.svg', width: 24, height: 24),
+                    loading: isLoading,
+                    onTap: _signInWithGoogle,
                   ),
                   const SizedBox(height: 20),
                   Row(

@@ -126,16 +126,15 @@ class XoCard extends StatelessWidget {
       child: child,
     );
     if (onTap == null) return card;
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        borderRadius: XoDesign.radiusAll,
-        onTap: () {
-          HapticFeedback.selectionClick();
-          onTap!();
-        },
-        child: card,
-      ),
+    // GestureDetector (not InkWell): proven reliable tap handling,
+    // no Material-ancestor quirks.
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        HapticFeedback.selectionClick();
+        onTap!();
+      },
+      child: card,
     );
   }
 }
@@ -165,16 +164,15 @@ class XoGlassCard extends StatelessWidget {
       child: child,
     );
     if (onTap == null) return card;
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        borderRadius: XoDesign.radiusAll,
-        onTap: () {
-          HapticFeedback.selectionClick();
-          onTap!();
-        },
-        child: card,
-      ),
+    // GestureDetector (not InkWell): proven reliable tap handling,
+    // no Material-ancestor quirks.
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        HapticFeedback.selectionClick();
+        onTap!();
+      },
+      child: card,
     );
   }
 }
@@ -183,6 +181,7 @@ class XoGlassCard extends StatelessWidget {
 class XoButton extends StatelessWidget {
   final String label;
   final String? icon;
+  final Widget? leading;
   final VoidCallback? onTap;
   final bool loading;
   final Gradient gradient;
@@ -192,6 +191,7 @@ class XoButton extends StatelessWidget {
     super.key,
     required this.label,
     this.icon,
+    this.leading,
     this.onTap,
     this.loading = false,
     this.gradient = XoDesign.goldGradient,
@@ -202,10 +202,21 @@ class XoButton extends StatelessWidget {
     super.key,
     required this.label,
     this.icon,
+    this.leading,
     this.onTap,
     this.loading = false,
   })  : gradient = XoDesign.indigoGradient,
         foreground = Colors.white;
+
+  const XoButton.white({
+    super.key,
+    required this.label,
+    this.icon,
+    this.leading,
+    this.onTap,
+    this.loading = false,
+  })  : gradient = const LinearGradient(colors: [Colors.white, Colors.white]),
+        foreground = XoDesign.ink;
 
   @override
   Widget build(BuildContext context) {
@@ -242,7 +253,10 @@ class XoButton extends StatelessWidget {
                       child: CircularProgressIndicator(strokeWidth: 3, color: foreground),
                     )
                   else ...[
-                    if (iconName != null) ...[
+                    if (leading != null) ...[
+                      leading!,
+                      const SizedBox(width: 10),
+                    ] else if (iconName != null) ...[
                       XoIcon(iconName, color: foreground, size: 22),
                       const SizedBox(width: 10),
                     ],
