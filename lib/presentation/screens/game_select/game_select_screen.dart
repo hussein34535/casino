@@ -25,7 +25,7 @@ class GameSelectScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF5CC),
+      backgroundColor: ComicColors.cream,
       appBar: AppBar(
         backgroundColor: ComicColors.purple,
         elevation: 0,
@@ -43,7 +43,7 @@ class GameSelectScreen extends ConsumerWidget {
         ],
       ),
       body: ComicBackground(
-        bgColor: const Color(0xFFFFF5CC),
+        bgColor: ComicColors.cream,
         dotColor: ComicColors.purple,
         child: Column(
           children: [

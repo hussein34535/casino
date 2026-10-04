@@ -34,7 +34,7 @@ void main() {
   group('RoomNotifier Tests', () {
     test('Initial state is null data', () {
       final state = container.read(roomNotifierProvider);
-      expect(state, const AsyncValue.data(null));
+      expect(state, const AsyncValue<void>.data(null));
     });
 
     test('currentRoomIdProvider is initially null', () {

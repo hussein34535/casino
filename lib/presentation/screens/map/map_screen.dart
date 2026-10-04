@@ -18,7 +18,7 @@ class MapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F7FF),
+      backgroundColor: ComicColors.cream,
       appBar: AppBar(
         backgroundColor: ComicColors.blue,
         elevation: 0,
@@ -26,7 +26,7 @@ class MapScreen extends StatelessWidget {
         shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
       ),
       body: ComicBackground(
-        bgColor: const Color(0xFFF0F7FF),
+        bgColor: ComicColors.cream,
         dotColor: ComicColors.skyBlue,
         child: Column(
           children: [

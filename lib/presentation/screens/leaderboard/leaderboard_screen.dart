@@ -28,7 +28,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
     const periodMap = {'weekly': '📅 أسبوعي', 'monthly': '🗓️ شهري', 'allTime': '🏆 كل الوقت'};
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF5CC),
+      backgroundColor: ComicColors.cream,
       appBar: AppBar(
         backgroundColor: ComicColors.orange,
         elevation: 0,
@@ -36,7 +36,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
         shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
       ),
       body: ComicBackground(
-        bgColor: const Color(0xFFFFF5CC),
+        bgColor: ComicColors.cream,
         dotColor: ComicColors.orange,
         child: Column(
           children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:game_show_app/core/design/xo_icon.dart';
 import 'package:game_show_app/core/widgets/premium_widgets.dart';
 
 class MainScaffold extends StatelessWidget {
@@ -45,11 +46,11 @@ class _ComicBottomNav extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _NavItem(icon: Icons.home_rounded, label: 'HOME', isSelected: currentIndex == 0, onTap: () => onTap(0)),
-            _NavItem(icon: Icons.leaderboard_rounded, label: 'RANKS', isSelected: currentIndex == 1, onTap: () => onTap(1)),
-            _NavItem(icon: Icons.map_rounded, label: 'MAP', isSelected: currentIndex == 2, onTap: () => onTap(2)),
-            _NavItem(icon: Icons.people_alt_rounded, label: 'SOCIAL', isSelected: currentIndex == 3, onTap: () => onTap(3)),
-            _NavItem(icon: Icons.person_rounded, label: 'PROFILE', isSelected: currentIndex == 4, onTap: () => onTap(4)),
+            _NavItem(icon: 'home', label: 'HOME', isSelected: currentIndex == 0, onTap: () => onTap(0)),
+            _NavItem(icon: 'trophy', label: 'RANKS', isSelected: currentIndex == 1, onTap: () => onTap(1)),
+            _NavItem(icon: 'map', label: 'MAP', isSelected: currentIndex == 2, onTap: () => onTap(2)),
+            _NavItem(icon: 'users', label: 'SOCIAL', isSelected: currentIndex == 3, onTap: () => onTap(3)),
+            _NavItem(icon: 'user', label: 'PROFILE', isSelected: currentIndex == 4, onTap: () => onTap(4)),
           ],
         ),
       ),
@@ -58,7 +59,7 @@ class _ComicBottomNav extends StatelessWidget {
 }
 
 class _NavItem extends StatelessWidget {
-  final IconData icon;
+  final String icon;
   final String label;
   final bool isSelected;
   final VoidCallback onTap;
@@ -83,7 +84,7 @@ class _NavItem extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: isSelected ? ComicColors.black : Colors.black45, size: isSelected ? 28 : 24),
+            XoIcon(icon, color: isSelected ? ComicColors.black : const Color(0xFF9E9E9E), size: isSelected ? 28 : 24),
             if (isSelected) ...[
               const SizedBox(height: 2),
               Text(label, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 10, color: ComicColors.black)),

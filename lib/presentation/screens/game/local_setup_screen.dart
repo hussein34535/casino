@@ -121,7 +121,7 @@ class _LocalSetupScreenState extends ConsumerState<LocalSetupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F7FF),
+      backgroundColor: ComicColors.cream,
       appBar: AppBar(
         backgroundColor: ComicColors.green,
         elevation: 0,
@@ -130,7 +130,7 @@ class _LocalSetupScreenState extends ConsumerState<LocalSetupScreen> {
         shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
       ),
       body: ComicBackground(
-        bgColor: const Color(0xFFF0F7FF),
+        bgColor: ComicColors.cream,
         dotColor: ComicColors.green,
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),

@@ -321,7 +321,7 @@ void main() {
 
         expect(notifier.state.players, isEmpty);
         expect(notifier.state.questions, isEmpty);
-        expect(notifier.state.selectedCategories, []);
+        expect(notifier.state.selectedCategories, isNull);
         expect(notifier.state.currentQuestionIndex, 0);
         expect(notifier.state.isLoading, false);
         expect(notifier.state.error, isNull);

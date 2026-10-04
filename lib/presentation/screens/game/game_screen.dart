@@ -259,7 +259,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
 
     if (gameState.isLoading) {
       return const Scaffold(
-        backgroundColor: Color(0xFFF0F7FF),
+        backgroundColor: ComicColors.cream,
         body: Center(child: CircularProgressIndicator(color: ComicColors.blue)),
       );
     }
@@ -286,12 +286,12 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F7FF),
+      backgroundColor: ComicColors.cream,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         title: Text(
-          '🎯 ${gameState.selectedCategories?.join(" + ") ?? 'GAME'}',
+          '🎯 ${gameState.selectedCategories?.isNotEmpty == true ? gameState.selectedCategories!.join(" + ") : 'GAME'}',
           style: const TextStyle(fontWeight: FontWeight.w900, color: ComicColors.black, fontSize: 14),
         ),
         automaticallyImplyLeading: false,
@@ -306,7 +306,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       body: Stack(
         children: [
           ComicBackground(
-            bgColor: const Color(0xFFF0F7FF),
+            bgColor: ComicColors.cream,
             dotColor: ComicColors.blue,
             child: SafeArea(
               child: Column(

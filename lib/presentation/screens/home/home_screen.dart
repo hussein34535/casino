@@ -25,7 +25,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       backgroundColor: ComicColors.cream,
       body: ComicBackground(
-        bgColor: const Color(0xFFFFF5CC),
+        bgColor: ComicColors.cream,
         dotColor: ComicColors.orange,
         child: SafeArea(
           child: Column(
