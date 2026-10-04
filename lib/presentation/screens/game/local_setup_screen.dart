@@ -5,7 +5,9 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:game_show_app/core/design/game_categories.dart';
 import 'package:game_show_app/core/design/xo_icon.dart';
+import 'package:game_show_app/presentation/providers/auth_provider.dart';
 import 'package:game_show_app/presentation/providers/game_provider.dart';
+import 'package:game_show_app/presentation/providers/room_provider.dart';
 import 'package:game_show_app/core/widgets/premium_widgets.dart';
 
 class LocalSetupScreen extends ConsumerStatefulWidget {
@@ -16,10 +18,7 @@ class LocalSetupScreen extends ConsumerStatefulWidget {
 }
 
 class _LocalSetupScreenState extends ConsumerState<LocalSetupScreen> {
-  final List<TextEditingController> _controllers = [
-    TextEditingController(text: 'لاعب 1'),
-    TextEditingController(text: 'لاعب 2'),
-  ];
+  late final List<TextEditingController> _controllers;
   final Set<String> _selectedCategories = {'trivia'};
   bool _playAgainstBot = false;
   String _botDifficulty = 'medium';
@@ -31,21 +30,50 @@ class _LocalSetupScreenState extends ConsumerState<LocalSetupScreen> {
     'elon': ('crown', 'إيلون AI'),
   };
 
+  String _initialName() {
+    final user = ref.read(authStateProvider).value;
+    if (user == null) return '';
+    final name = user.displayName.trim();
+    if (name.isNotEmpty) return name;
+    return user.email.split('@').first;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controllers = [TextEditingController(text: _initialName())];
+  }
+
   void _addPlayer() {
-    if (_controllers.length >= 10) return;
+    if (_playAgainstBot) return;
+    if (_controllers.length >= 10) {
+      _snack('الحد الأقصى 10 لاعبين');
+      return;
+    }
     HapticFeedback.mediumImpact();
     setState(() {
-      _controllers.add(TextEditingController(text: 'لاعب ${_controllers.length + 1}'));
+      _controllers.add(TextEditingController());
     });
   }
 
   void _removePlayer(int index) {
-    if (_controllers.length <= 2) return;
+    if (_controllers.length <= 1) return;
     HapticFeedback.lightImpact();
     setState(() {
       _controllers[index].dispose();
       _controllers.removeAt(index);
     });
+  }
+
+  void _snack(String msg) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(
+        content: Text(msg, style: const TextStyle(fontWeight: FontWeight.w800)),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: ComicColors.black,
+      ));
   }
 
   @override
@@ -60,20 +88,30 @@ class _LocalSetupScreenState extends ConsumerState<LocalSetupScreen> {
     if (_selectedCategories.isEmpty) return;
 
     final notifier = ref.read(gameStateProvider.notifier);
+    ref.read(currentRoomIdProvider.notifier).state = null;
 
     if (_playAgainstBot) {
-      final playerName = _controllers.isNotEmpty ? _controllers.first.text.trim() : 'لاعب 1';
-      if (playerName.isEmpty) return;
+      final playerName = _controllers.first.text.trim();
+      if (playerName.isEmpty) {
+        _snack('اكتب اسمك الأول');
+        return;
+      }
       final botName = _botLevels[_botDifficulty]!.$2;
       notifier.setPlayersWithBot(playerName, botName, _botDifficulty);
     } else {
-      final names = _controllers.map((c) => c.text.trim()).where((n) => n.isNotEmpty).toList();
-      if (names.length < 2) return;
+      final names = _controllers
+          .map((c) => c.text.trim())
+          .where((n) => n.isNotEmpty)
+          .toList();
+      if (names.length < 2) {
+        _snack('لازم اسمين على الأقل عشان تلعب');
+        return;
+      }
       notifier.setPlayers(names);
     }
 
     await notifier.initializeGame(_selectedCategories.toList());
-    
+
     if (mounted) {
       final type = _selectedCategories.first;
       context.push('/game-select/$type');
@@ -200,9 +238,9 @@ class _LocalSetupScreenState extends ConsumerState<LocalSetupScreen> {
                         HapticFeedback.mediumImpact();
                         setState(() {
                           _playAgainstBot = val;
-                          if (val && _controllers.length > 2) {
-                            // Remove extra players when bot is enabled
-                            while (_controllers.length > 2) {
+                          if (val) {
+                            // Bot mode = single player only
+                            while (_controllers.length > 1) {
                               _controllers.last.dispose();
                               _controllers.removeLast();
                             }
@@ -289,10 +327,12 @@ class _LocalSetupScreenState extends ConsumerState<LocalSetupScreen> {
                               fontSize: 18)),
                     ],
                   ),
-                  GestureDetector(
-                    onTap: _addPlayer,
-                    child: const ComicTag(label: '+ إضافة لاعب', color: ComicColors.yellow),
-                  ),
+                  if (!_playAgainstBot)
+                    GestureDetector(
+                      onTap: _addPlayer,
+                      child: ComicTag(
+                          label: '+ إضافة لاعب', color: ComicColors.yellow),
+                    ),
                 ],
               ),
               const SizedBox(height: 16),
@@ -313,13 +353,15 @@ class _LocalSetupScreenState extends ConsumerState<LocalSetupScreen> {
                             style: const TextStyle(fontWeight: FontWeight.w900, color: ComicColors.black),
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: 'اسم اللاعب ${index + 1}',
+                              hintText: index == 0 && _controllers.length == 1
+                                  ? 'اسمك'
+                                  : 'اسم اللاعب ${index + 1}',
                               prefixIcon: const Icon(Icons.person, color: ComicColors.black),
                             ),
                           ),
                         ),
                       ),
-                      if (_controllers.length > 2) ...[
+                      if (_controllers.length > 1) ...[
                         const SizedBox(width: 12),
                         GestureDetector(
                           onTap: () => _removePlayer(index),

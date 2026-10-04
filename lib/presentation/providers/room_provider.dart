@@ -37,7 +37,7 @@ class RoomNotifier extends StateNotifier<AsyncValue<void>> {
 
   Future<void> createRoom({
     required List<String> categories,
-    int maxPlayers = 10,
+    int maxPlayers = 5,
     bool isPublic = true,
   }) async {
     state = const AsyncValue.loading();
@@ -46,7 +46,7 @@ class RoomNotifier extends StateNotifier<AsyncValue<void>> {
       if (user == null) throw Exception('يجب تسجيل الدخول لإنشاء غرفة');
 
       final firestore = _ref.read(firestoreServiceProvider);
-      
+
       // Generate a random 6 digit code
       final roomCode = (100000 + Random().nextInt(900000)).toString();
 
@@ -69,7 +69,7 @@ class RoomNotifier extends StateNotifier<AsyncValue<void>> {
         roomCode: roomCode,
         categories: categories,
         status: 'waiting',
-        maxPlayers: maxPlayers,
+        maxPlayers: maxPlayers.clamp(2, 5),
         players: [hostPlayer],
         playerIds: [user.id],
         isPublic: isPublic,

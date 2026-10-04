@@ -5,8 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 ///
 /// Usage: `const XoIcon('wifi', size: 24, color: Colors.white)`.
 /// Available names: brain, film, music, puzzle, type, gamepad2, wifi,
-/// users, zap, sparkles, crown, doorOpen, logIn, plus, arrowLeft,
-/// swords, check, x, copy, play, timer, loader2, lock, search.
+/// users, zap, sparkles, crown, doorOpen, logIn, plus, minus, arrowLeft,
+/// swords, check, x, copy, play, timer, loader2, lock, search, google.
 class XoIcon extends StatelessWidget {
   final String name;
   final double size;

@@ -22,14 +22,17 @@ class CreateRoomScreen extends ConsumerStatefulWidget {
 
 class _CreateRoomScreenState extends ConsumerState<CreateRoomScreen> {
   final Set<String> _selectedCategories = {'trivia'};
-  int _maxPlayers = 10;
+  int _maxPlayers = 4;
   bool _isPublic = true;
   bool _isCreating = false;
 
-  static const _playerOptions = [2, 4, 8, 10, 16];
-
   Future<void> _createRoom() async {
     if (_selectedCategories.isEmpty || _isCreating) return;
+    if (ref.read(authStateProvider).value == null) {
+      showXoSnack(context, 'لازم تسجّل دخولك الأول قبل إنشاء غرفة', error: true);
+      context.push('/login');
+      return;
+    }
     setState(() => _isCreating = true);
     try {
       await ref.read(roomNotifierProvider.notifier).createRoom(
@@ -47,6 +50,49 @@ class _CreateRoomScreenState extends ConsumerState<CreateRoomScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authAsync = ref.watch(authStateProvider);
+    if (!authAsync.hasValue) {
+      return const XoScaffold(
+        title: 'إنشاء غرفة',
+        titleIcon: 'plus',
+        body: Center(
+          child: CircularProgressIndicator(color: XoDesign.gold),
+        ),
+      );
+    }
+    if (authAsync.value == null) {
+      return XoScaffold(
+        title: 'إنشاء غرفة',
+        titleIcon: 'plus',
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: XoGlassCard(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const XoIcon('lock', color: XoDesign.gold, size: 44),
+                  const SizedBox(height: 16),
+                  Text('سجّل دخولك الأول',
+                      style: XoDesign.h2.copyWith(color: Colors.white)),
+                  const SizedBox(height: 8),
+                  const Text('الحساب مطلوب لإنشاء غرفة أونلاين',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(color: XoDesign.onDarkMuted, fontSize: 14)),
+                  const SizedBox(height: 20),
+                  XoButton(
+                    label: 'تسجيل الدخول',
+                    icon: 'logIn',
+                    onTap: () => context.push('/login'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
     return XoScaffold(
       title: 'إنشاء غرفة',
       titleIcon: 'plus',
@@ -86,43 +132,64 @@ class _CreateRoomScreenState extends ConsumerState<CreateRoomScreen> {
             const SizedBox(height: 20),
             Text('أقصى عدد للاعبين',
                 style: XoDesign.h2.copyWith(color: Colors.white)),
+            const SizedBox(height: 4),
+            Text('من 2 لـ 5 لاعبين',
+                style: XoDesign.caption.copyWith(color: XoDesign.onDarkMuted)),
             const SizedBox(height: 12),
             Container(
-              padding: const EdgeInsets.all(6),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               decoration: BoxDecoration(
                 color: XoDesign.glass,
                 borderRadius: BorderRadius.circular(18),
                 border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
               ),
               child: Row(
-                children: _playerOptions.map((count) {
-                  final selected = _maxPlayers == count;
-                  return Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        HapticFeedback.selectionClick();
-                        setState(() => _maxPlayers = count);
-                      },
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        decoration: BoxDecoration(
-                          gradient: selected ? XoDesign.goldGradient : null,
-                          borderRadius: BorderRadius.circular(13),
-                        ),
-                        child: Text(
-                          '$count',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w900,
-                            fontSize: 16,
-                            color: selected ? XoDesign.navy900 : Colors.white70,
+                children: [
+                  _StepperButton(
+                    icon: 'minus',
+                    enabled: _maxPlayers > 2,
+                    onTap: () {
+                      HapticFeedback.selectionClick();
+                      setState(() => _maxPlayers = (_maxPlayers - 1).clamp(2, 5));
+                    },
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 180),
+                          transitionBuilder: (child, anim) => ScaleTransition(
+                              scale: anim, child: child),
+                          child: Text(
+                            '$_maxPlayers',
+                            key: ValueKey(_maxPlayers),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w900,
+                              fontSize: 30,
+                              color: XoDesign.gold,
+                            ),
                           ),
                         ),
-                      ),
+                        const Text(
+                          'لاعبين',
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: XoDesign.onDarkMuted),
+                        ),
+                      ],
                     ),
-                  );
-                }).toList(),
+                  ),
+                  _StepperButton(
+                    icon: 'plus',
+                    enabled: _maxPlayers < 5,
+                    onTap: () {
+                      HapticFeedback.selectionClick();
+                      setState(() => _maxPlayers = (_maxPlayers + 1).clamp(2, 5));
+                    },
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 20),
@@ -239,6 +306,40 @@ class _VisibilityOption extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _StepperButton extends StatelessWidget {
+  final String icon;
+  final bool enabled;
+  final VoidCallback onTap;
+
+  const _StepperButton(
+      {required this.icon, required this.enabled, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: enabled
+          ? () {
+              HapticFeedback.selectionClick();
+              onTap();
+            }
+          : null,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        width: 52,
+        height: 52,
+        decoration: BoxDecoration(
+          gradient: enabled ? XoDesign.goldGradient : null,
+          color: enabled ? null : Colors.white.withValues(alpha: 0.06),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: XoIcon(icon,
+            size: 24,
+            color: enabled ? XoDesign.navy900 : Colors.white24),
       ),
     );
   }

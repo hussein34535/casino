@@ -8,9 +8,11 @@ import 'package:game_show_app/core/design/xo_design.dart';
 import 'package:game_show_app/core/design/xo_icon.dart';
 import 'package:game_show_app/core/design/xo_widgets.dart';
 import 'package:game_show_app/data/models/game/game_session_model.dart';
+import 'package:game_show_app/presentation/providers/auth_provider.dart';
+import 'package:game_show_app/presentation/providers/game_provider.dart';
 import 'package:game_show_app/presentation/providers/room_provider.dart';
 
-/// Online entry: join by code, browse open rooms, or create a room.
+/// Online entry: join by code up front, browse open rooms, or create a room.
 class OnlineEntryScreen extends ConsumerStatefulWidget {
   const OnlineEntryScreen({super.key});
 
@@ -23,7 +25,6 @@ class _OnlineEntryScreenState extends ConsumerState<OnlineEntryScreen> {
   final _searchController = TextEditingController();
   bool _isJoining = false;
   bool _codeReady = false;
-  bool _showBrowse = false;
   String _search = '';
 
   @override
@@ -46,6 +47,31 @@ class _OnlineEntryScreenState extends ConsumerState<OnlineEntryScreen> {
     }
   }
 
+  /// Starts a quick local game against a bot — no login required.
+  Future<void> _joinBot(_BotRoom bot) async {
+    if (_isJoining) return;
+    setState(() => _isJoining = true);
+    try {
+      // Never treat a leftover online room as active while playing locally.
+      ref.read(currentRoomIdProvider.notifier).state = null;
+
+      final user = ref.read(authStateProvider).value;
+      var playerName = 'أنت';
+      if (user != null) {
+        playerName = user.displayName.trim().isNotEmpty
+            ? user.displayName.trim()
+            : user.email.split('@').first;
+      }
+
+      final notifier = ref.read(gameStateProvider.notifier);
+      notifier.setPlayersWithBot(playerName, bot.botName, bot.difficulty);
+      await notifier.initializeGame([bot.category]);
+      if (mounted) context.push('/game-select/${bot.category}');
+    } finally {
+      if (mounted) setState(() => _isJoining = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return XoScaffold(
@@ -56,29 +82,37 @@ class _OnlineEntryScreenState extends ConsumerState<OnlineEntryScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // ── Mode switch ───────────────────────────────
-            _ModeSwitch(
-              browse: _showBrowse,
-              onChanged: (v) => setState(() => _showBrowse = v),
+            // ── Join by code — always visible up front ────
+            _JoinCard(
+              codeKey: _codeKey,
+              codeReady: _codeReady,
+              isJoining: _isJoining,
+              onChanged: () => setState(() =>
+                  _codeReady = (_codeKey.currentState?.code.length ?? 0) == 6),
+              onJoin: _join,
+            ),
+            const SizedBox(height: 20),
+            // ── Divider ───────────────────────────────────
+            Row(
+              children: [
+                const Expanded(child: Divider(color: Colors.white24)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Text('أو تصفح الغرف',
+                      style: XoDesign.body.copyWith(color: XoDesign.onDarkMuted)),
+                ),
+                const Expanded(child: Divider(color: Colors.white24)),
+              ],
             ),
             const SizedBox(height: 16),
-            if (!_showBrowse) ...[
-              _JoinCard(
-                codeKey: _codeKey,
-                codeReady: _codeReady,
-                isJoining: _isJoining,
-                onChanged: () => setState(() =>
-                    _codeReady = (_codeKey.currentState?.code.length ?? 0) == 6),
-                onJoin: _join,
-              ),
-            ] else ...[
-              _BrowseSection(
-                search: _search,
-                onSearch: (v) => setState(() => _search = v.trim()),
-                onJoin: _join,
-                isJoining: _isJoining,
-              ),
-            ],
+            // ── Browse: real rooms + bot rooms (always) ───
+            _BrowseSection(
+              search: _search,
+              onSearch: (v) => setState(() => _search = v.trim()),
+              onJoin: _join,
+              onJoinBot: _joinBot,
+              isJoining: _isJoining,
+            ),
             // ── Divider ───────────────────────────────────
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
@@ -145,64 +179,6 @@ class _GradientIcon extends StatelessWidget {
   }
 }
 
-class _ModeSwitch extends StatelessWidget {
-  final bool browse;
-  final ValueChanged<bool> onChanged;
-
-  const _ModeSwitch({required this.browse, required this.onChanged});
-
-  @override
-  Widget build(BuildContext context) {
-    Widget tab(bool active, String icon, String label, bool value) {
-      return Expanded(
-        child: GestureDetector(
-          onTap: () {
-            HapticFeedback.selectionClick();
-            onChanged(value);
-          },
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            decoration: BoxDecoration(
-              gradient: active ? XoDesign.goldGradient : null,
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                XoIcon(icon,
-                    size: 18,
-                    color: active ? XoDesign.navy900 : Colors.white70),
-                const SizedBox(width: 8),
-                Text(label,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontSize: 15,
-                        color: active ? XoDesign.navy900 : Colors.white70)),
-              ],
-            ),
-          ),
-        ),
-      );
-    }
-
-    return Container(
-      padding: const EdgeInsets.all(6),
-      decoration: BoxDecoration(
-        color: XoDesign.glass,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
-      ),
-      child: Row(
-        children: [
-          tab(!browse, 'logIn', 'انضم بكود', false),
-          tab(browse, 'search', 'تصفح الغرف', true),
-        ],
-      ),
-    );
-  }
-}
-
 class _JoinCard extends StatelessWidget {
   final GlobalKey<XoCodeInputState> codeKey;
   final bool codeReady;
@@ -264,18 +240,24 @@ class _BrowseSection extends ConsumerWidget {
   final String search;
   final ValueChanged<String> onSearch;
   final Future<void> Function(String code) onJoin;
+  final Future<void> Function(_BotRoom bot) onJoinBot;
   final bool isJoining;
 
   const _BrowseSection({
     required this.search,
     required this.onSearch,
     required this.onJoin,
+    required this.onJoinBot,
     required this.isJoining,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final roomsAsync = ref.watch(openRoomsProvider);
+    final q = search.toLowerCase();
+    final bots = _botRooms
+        .where((b) => q.isEmpty || b.title.toLowerCase().contains(q) || b.botName.toLowerCase().contains(q))
+        .toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -303,6 +285,7 @@ class _BrowseSection extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 14),
+        // ── Real rooms ───────────────────────────────────
         roomsAsync.when(
           loading: () => const Center(
             child: Padding(
@@ -324,7 +307,6 @@ class _BrowseSection extends ConsumerWidget {
             ),
           ),
           data: (rooms) {
-            final q = search.toLowerCase();
             final visible = rooms.where((r) {
               if (!r.isPublic) return false;
               if (r.players.length >= r.maxPlayers) return false;
@@ -346,7 +328,7 @@ class _BrowseSection extends ConsumerWidget {
                             fontWeight: FontWeight.w800,
                             fontSize: 16)),
                     SizedBox(height: 4),
-                    Text('أنشئ غرفتك واعزم أصحابك!',
+                    Text('جرّب غرف البوتات بالأسفل أو أنشئ غرفتك!',
                         style: TextStyle(
                             color: XoDesign.onDarkMuted, fontSize: 13)),
                   ],
@@ -355,7 +337,10 @@ class _BrowseSection extends ConsumerWidget {
             }
 
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                const _SectionHeader(icon: 'wifi', label: 'غرف حقيقية'),
+                const SizedBox(height: 10),
                 for (var i = 0; i < visible.length; i++)
                   Padding(
                     padding: EdgeInsets.only(bottom: i == visible.length - 1 ? 0 : 10),
@@ -371,6 +356,23 @@ class _BrowseSection extends ConsumerWidget {
             );
           },
         ),
+        // ── Bot rooms (always available) ─────────────────
+        if (bots.isNotEmpty) ...[
+          const SizedBox(height: 20),
+          const _SectionHeader(icon: 'brain', label: 'غرف البوتات — العب فوراً'),
+          const SizedBox(height: 10),
+          for (var i = 0; i < bots.length; i++)
+            Padding(
+              padding: EdgeInsets.only(bottom: i == bots.length - 1 ? 0 : 10),
+              child: RepaintBoundary(
+                child: _BotRoomCard(
+                  bot: bots[i],
+                  isJoining: isJoining,
+                  onJoin: () => onJoinBot(bots[i]),
+                ).animate().fadeIn(delay: (i * 60).ms, duration: 300.ms),
+              ),
+            ),
+        ],
       ],
     ).animate().fadeIn(duration: 350.ms);
   }
@@ -379,6 +381,146 @@ class _BrowseSection extends ConsumerWidget {
     if (room.players.isEmpty) return 'مضيف مجهول';
     final host = room.players.where((p) => p.isHost);
     return (host.isEmpty ? room.players.first : host.first).name;
+  }
+}
+
+/// Built-in bot rooms so there is always something to join.
+class _BotRoom {
+  final String title;
+  final String botName;
+  final String difficulty;
+  final String category;
+
+  const _BotRoom({
+    required this.title,
+    required this.botName,
+    required this.difficulty,
+    required this.category,
+  });
+}
+
+const _botRooms = [
+  _BotRoom(title: 'مباراة ودّية', botName: 'مبتدئ AI', difficulty: 'easy', category: 'trivia'),
+  _BotRoom(title: 'تحدي الأفلام', botName: 'باحث AI', difficulty: 'medium', category: 'movies'),
+  _BotRoom(title: 'تحدي الموسيقى', botName: 'عبقري AI', difficulty: 'hard', category: 'music'),
+  _BotRoom(title: 'غزو إيلون', botName: 'إيلون AI', difficulty: 'elon', category: 'puzzles'),
+];
+
+class _SectionHeader extends StatelessWidget {
+  final String icon;
+  final String label;
+  const _SectionHeader({required this.icon, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        XoIcon(icon, color: XoDesign.gold, size: 18),
+        const SizedBox(width: 8),
+        Text(label,
+            style: const TextStyle(
+                fontSize: 15, fontWeight: FontWeight.w900, color: Colors.white)),
+      ],
+    );
+  }
+}
+
+class _BotRoomCard extends StatelessWidget {
+  final _BotRoom bot;
+  final bool isJoining;
+  final VoidCallback onJoin;
+
+  const _BotRoomCard({required this.bot, required this.isJoining, required this.onJoin});
+
+  @override
+  Widget build(BuildContext context) {
+    final catInfo = gameCategories.where((c) => c.id == bot.category);
+    final cat = catInfo.isEmpty ? gameCategories.first : catInfo.first;
+
+    return XoCard(
+      padding: const EdgeInsets.all(14),
+      child: Row(
+        children: [
+          Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              gradient: XoDesign.indigoGradient,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: const XoIcon('brain', color: Colors.white, size: 24),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(bot.title,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w900, fontSize: 16, color: XoDesign.ink),
+                    overflow: TextOverflow.ellipsis),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: cat.color.withValues(alpha: 0.14),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          XoIcon(cat.icon, size: 13, color: cat.color),
+                          const SizedBox(width: 4),
+                          Text(cat.titleAr,
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w800,
+                                  color: cat.color)),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(bot.botName,
+                        style: const TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.w800, color: XoDesign.muted)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 8),
+          GestureDetector(
+            onTap: isJoining
+                ? null
+                : () {
+                    HapticFeedback.mediumImpact();
+                    onJoin();
+                  },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              decoration: BoxDecoration(
+                gradient: XoDesign.goldGradient,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: isJoining
+                  ? const SizedBox(
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(
+                          strokeWidth: 2.5, color: XoDesign.navy900),
+                    )
+                  : const Text('العب',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 14,
+                          color: XoDesign.navy900)),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

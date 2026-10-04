@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -25,11 +24,7 @@ class GameScreen extends ConsumerStatefulWidget {
 
 class _GameScreenState extends ConsumerState<GameScreen> {
   late AudioPlayer _audioPlayer;
-  late AudioPlayer _buzzerPlayer;
   final bool _audioLoadError = false;
-  bool _isBuzzerActive = true;
-  int _buzzerCooldown = 3;
-  Timer? _cooldownTimer;
   int _answerTimerSeconds = 20;
   Timer? _answerTimer;
   final TextEditingController _answerController = TextEditingController();
@@ -39,44 +34,6 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   void initState() {
     super.initState();
     _audioPlayer = AudioPlayer();
-    _buzzerPlayer = AudioPlayer();
-    _loadBuzzerSound();
-  }
-
-  Future<void> _loadBuzzerSound() async {
-    try {
-      // Using a public URL since the local asset 'assets/audio/buzzer.mp3' is missing
-      await _buzzerPlayer.setUrl('https://www.soundjay.com/buttons/sounds/button-3.mp3');
-    } catch (e) {
-      debugPrint('Error loading buzzer: $e');
-    }
-  }
-
-  void _handleBuzzer() {
-    if (!_isBuzzerActive) return;
-    
-    _buzzerPlayer.seek(Duration.zero);
-    _buzzerPlayer.play();
-    
-    HapticFeedback.vibrate();
-    
-    setState(() {
-      _isBuzzerActive = false;
-      _buzzerCooldown = 3;
-    });
-
-    _cooldownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (_buzzerCooldown == 0) {
-        setState(() {
-          _isBuzzerActive = true;
-        });
-        timer.cancel();
-      } else {
-        setState(() {
-          _buzzerCooldown--;
-        });
-      }
-    });
   }
 
   void _startAnswerTimer(String buzzerPlayerId, String currentUserId, String currentAnswer) {
@@ -114,8 +71,6 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   @override
   void dispose() {
     _audioPlayer.dispose();
-    _buzzerPlayer.dispose();
-    _cooldownTimer?.cancel();
     _answerTimer?.cancel();
     _answerController.dispose();
     super.dispose();
@@ -294,8 +249,6 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         _showFinalWinnerDialog(context, gameState.winnerId!);
       });
     }
-
-    final isHost = isMultiplayer ? (currentUser?.id == roomSession?.hostId) : true;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF0F7FF),
@@ -586,69 +539,76 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     ),
                     child: Row(
                       children: [
-                        Expanded(
+                        if (isMultiplayer) ...[
+                          Expanded(
                             flex: 2,
                             child: GestureDetector(
-                              onTap: isMultiplayer 
-                                ? (isBuzzerClaimed ? null : () => gameNotifier.claimBuzzer(currentUser!.id))
-                                : _handleBuzzer,
+                              onTap: isBuzzerClaimed
+                                  ? null
+                                  : () => gameNotifier.claimBuzzer(currentUser!.id),
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 200),
                                 height: 60,
                                 decoration: BoxDecoration(
-                                  color: isMultiplayer 
-                                    ? (isBuzzerClaimed ? ComicColors.grey : ComicColors.red)
-                                    : (_isBuzzerActive ? ComicColors.red : ComicColors.grey),
+                                  color: isBuzzerClaimed
+                                      ? ComicColors.grey
+                                      : ComicColors.red,
                                   borderRadius: BorderRadius.circular(15),
-                                  border: Border.all(color: ComicColors.black, width: 3),
-                                  boxShadow: (isMultiplayer ? !isBuzzerClaimed : _isBuzzerActive) 
-                                    ? const [BoxShadow(color: ComicColors.black, offset: Offset(4, 4), blurRadius: 0)] 
-                                    : [],
+                                  border:
+                                      Border.all(color: ComicColors.black, width: 3),
+                                  boxShadow: !isBuzzerClaimed
+                                      ? const [
+                                          BoxShadow(
+                                              color: ComicColors.black,
+                                              offset: Offset(4, 4),
+                                              blurRadius: 0)
+                                        ]
+                                      : [],
                                 ),
                                 child: Center(
-                                  child: (isMultiplayer ? isBuzzerClaimed : !_isBuzzerActive)
-                                    ? (isMultiplayer 
-                                        ? const Icon(Icons.lock, color: Colors.white, size: 28)
-                                        : Text('$_buzzerCooldown', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 24)))
-                                    : const Icon(Icons.notifications_active_rounded, color: Colors.white, size: 32),
+                                  child: isBuzzerClaimed
+                                      ? const Icon(Icons.lock,
+                                          color: Colors.white, size: 28)
+                                      : const Icon(Icons.notifications_active_rounded,
+                                          color: Colors.white, size: 32),
                                 ),
                               ),
                             ),
                           ),
-                          
                           const SizedBox(width: 16),
-
-                          // Voting / Next Button
-                          if (isMultiplayer)
-                            Expanded(
-                              flex: 3,
-                              child: ComicButton(
-                                label: hasVotedNext ? '⌛ بانتظار البقية' : '⏭️ التالي',
-                                color: hasVotedNext ? ComicColors.grey : ComicColors.blue,
-                                textColor: Colors.white,
-                                onTap: hasVotedNext ? () {} : () => gameNotifier.voteNext(),
-                              ),
-                            )
-                          else if (isHost) ...[
-                            Expanded(
-                              flex: 3,
-                              child: ComicButton(
-                                label: '⏭️ التالي',
-                                color: ComicColors.blue,
-                                textColor: Colors.white,
-                                onTap: currentQuestionIndex < gameState.questions.length - 1
+                          Expanded(
+                            flex: 3,
+                            child: ComicButton(
+                              label:
+                                  hasVotedNext ? '⌛ بانتظار البقية' : '⏭️ التالي',
+                              color:
+                                  hasVotedNext ? ComicColors.grey : ComicColors.blue,
+                              textColor: Colors.white,
+                              onTap: hasVotedNext
+                                  ? () {}
+                                  : () => gameNotifier.voteNext(),
+                            ),
+                          ),
+                        ] else ...[
+                          Expanded(
+                            flex: 3,
+                            child: ComicButton(
+                              label: '⏭️ التالي',
+                              color: ComicColors.blue,
+                              textColor: Colors.white,
+                              onTap: currentQuestionIndex < gameState.questions.length - 1
                                   ? () => gameNotifier.nextQuestionFirestore()
                                   : () {},
-                              ),
                             ),
-                            const SizedBox(width: 12),
-                            ComicButton(
-                              label: '🏆',
-                              color: ComicColors.yellow,
-                              onTap: () => _showWinnerSelectionDialog(context, ref),
-                              fontSize: 22,
-                            ),
-                          ],
+                          ),
+                          const SizedBox(width: 12),
+                          ComicButton(
+                            label: '🏆',
+                            color: ComicColors.yellow,
+                            onTap: () => _showWinnerSelectionDialog(context, ref),
+                            fontSize: 22,
+                          ),
+                        ],
                         ],
                       ),
                     ),
