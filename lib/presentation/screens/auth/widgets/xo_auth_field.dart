@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:game_show_app/core/design/xo_design.dart';
+import 'package:game_show_app/core/widgets/premium_widgets.dart';
 
-/// Shared premium text field for auth screens.
+/// Shared Comic text field for auth screens (docs/DESIGN_SYSTEM.md §6).
 class XoAuthField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
@@ -24,29 +24,30 @@ class XoAuthField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OutlineInputBorder border(Color color, [double width = 1.5]) =>
+    OutlineInputBorder border(Color color, [double width = 2.5]) =>
         OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(color: color, width: width),
         );
     return TextFormField(
       controller: controller,
       obscureText: obscure,
       keyboardType: keyboard,
-      style: const TextStyle(fontWeight: FontWeight.w700, color: XoDesign.ink),
+      style: const TextStyle(fontWeight: FontWeight.w800, color: ComicColors.black),
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: const TextStyle(fontWeight: FontWeight.w700, color: XoDesign.muted),
-        prefixIcon: Icon(prefix, color: XoDesign.muted),
+        labelStyle: const TextStyle(
+            fontWeight: FontWeight.w800, color: ComicColors.black),
+        prefixIcon: Icon(prefix, color: ComicColors.grey),
         suffixIcon: suffix,
         filled: true,
-        fillColor: const Color(0xFFF1F2F7),
+        fillColor: ComicColors.white,
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        border: border(const Color(0xFFE2E4EF)),
-        enabledBorder: border(const Color(0xFFE2E4EF)),
-        focusedBorder: border(XoDesign.indigo, 2),
-        errorBorder: border(XoDesign.rose),
-        focusedErrorBorder: border(XoDesign.rose, 2),
+        border: border(ComicColors.black),
+        enabledBorder: border(ComicColors.black),
+        focusedBorder: border(ComicColors.blue, 3),
+        errorBorder: border(ComicColors.red),
+        focusedErrorBorder: border(ComicColors.red, 3),
       ),
       validator: validator,
     );

@@ -1,30 +1,50 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:game_show_app/main.dart';
+import 'package:game_show_app/data/models/game/player_model.dart';
+import 'package:game_show_app/data/models/question/question_model.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  group('PlayerModel', () {
+    test('should create with default values', () {
+      final player = PlayerModel(id: '1', name: 'Test');
+      expect(player.score, 0);
+      expect(player.yellowCards, 0);
+      expect(player.redCards, 0);
+    });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    test('should serialize and deserialize', () {
+      final player = PlayerModel(id: '1', name: 'Test', score: 10);
+      final json = player.toJson();
+      final deserialized = PlayerModel.fromJson(json);
+      expect(deserialized.id, player.id);
+      expect(deserialized.name, player.name);
+      expect(deserialized.score, player.score);
+    });
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  group('QuestionModel', () {
+    test('should create question', () {
+      final q = QuestionModel(id: '1', type: 'trivia', text: 'Test question?', answer: 'Answer');
+      expect(q.text, 'Test question?');
+      expect(q.answer, 'Answer');
+    });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    test('should have type gradients', () {
+      expect(QuestionModel.typeGradients.containsKey('trivia'), true);
+      expect(QuestionModel.typeGradients.containsKey('movies'), true);
+    });
+  });
+
+  group('LocalPlayer', () {
+    test('should create with default values', () {
+      final player = LocalPlayer(name: 'Test');
+      expect(player.score, 0);
+      expect(player.yellowCards, 0);
+    });
+
+    test('should allow score modification', () {
+      final player = LocalPlayer(name: 'Test', score: 5);
+      player.score += 3;
+      expect(player.score, 8);
+    });
   });
 }

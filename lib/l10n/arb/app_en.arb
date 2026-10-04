@@ -1,0 +1,484 @@
+{
+  "@@locale": "en",
+  "@@nativeName": "English",
+  "@@appName": {
+    "description": "The name of the application"
+  },
+  "appName": "XO Game Show",
+  "@startGame": {
+    "description": "Button to start a new game"
+  },
+  "startGame": "Start Game",
+  "@newGame": {
+    "description": "Button to start a new game session"
+  },
+  "newGame": "New Game",
+  "@continueGame": {
+    "description": "Button to continue an existing game"
+  },
+  "continueGame": "Continue Game",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "settings": "Settings",
+  "@profile": {
+    "description": "Profile screen title"
+  },
+  "profile": "Profile",
+  "@leaderboard": {
+    "description": "Leaderboard screen title"
+  },
+  "leaderboard": "Leaderboard",
+  "@achievements": {
+    "description": "Achievements screen title"
+  },
+  "achievements": "Achievements",
+  "@friends": {
+    "description": "Friends list screen title"
+  },
+  "friends": "Friends",
+  "@logout": {
+    "description": "Button to log out of the account"
+  },
+  "logout": "Log out",
+  "@login": {
+    "description": "Button to log in"
+  },
+  "login": "Log in",
+  "@signUp": {
+    "description": "Button to create a new account"
+  },
+  "signUp": "Sign Up",
+  "@email": {
+    "description": "Email address field label"
+  },
+  "email": "Email",
+  "@password": {
+    "description": "Password field label"
+  },
+  "password": "Password",
+  "@confirmPassword": {
+    "description": "Confirm password field label"
+  },
+  "confirmPassword": "Confirm Password",
+  "@displayName": {
+    "description": "Display name field label"
+  },
+  "displayName": "Display Name",
+  "@forgotPassword": {
+    "description": "Link to reset forgotten password"
+  },
+  "forgotPassword": "Forgot Password?",
+  "@sendResetLink": {
+    "description": "Button to send password reset link"
+  },
+  "sendResetLink": "Send Reset Link",
+  "@orContinueWith": {
+    "description": "Label before social login options"
+  },
+  "orContinueWith": "Or continue with",
+  "@googleSignIn": {
+    "description": "Button to sign in with Google"
+  },
+  "googleSignIn": "Sign in with Google",
+  "@appleSignIn": {
+    "description": "Button to sign in with Apple"
+  },
+  "appleSignIn": "Sign in with Apple",
+  "@playerName": {
+    "description": "Player name field label"
+  },
+  "playerName": "Player Name",
+  "@addPlayer": {
+    "description": "Button to add a player"
+  },
+  "addPlayer": "Add Player",
+  "@removePlayer": {
+    "description": "Button to remove a player"
+  },
+  "removePlayer": "Remove Player",
+  "@start": {
+    "description": "Generic start button"
+  },
+  "start": "Start",
+  "@cancel": {
+    "description": "Generic cancel button"
+  },
+  "cancel": "Cancel",
+  "@confirm": {
+    "description": "Generic confirm button"
+  },
+  "confirm": "Confirm",
+  "@save": {
+    "description": "Generic save button"
+  },
+  "save": "Save",
+  "@delete": {
+    "description": "Generic delete button"
+  },
+  "delete": "Delete",
+  "@edit": {
+    "description": "Generic edit button"
+  },
+  "edit": "Edit",
+  "@search": {
+    "description": "Search field placeholder"
+  },
+  "search": "Search",
+  "@gameModes": {
+    "description": "Game modes screen title"
+  },
+  "gameModes": "Game Modes",
+  "@classic": {
+    "description": "Classic game mode name"
+  },
+  "classic": "Classic",
+  "@battleRoyale": {
+    "description": "Battle Royale game mode name"
+  },
+  "battleRoyale": "Battle Royale",
+  "@speedrun": {
+    "description": "Speedrun game mode name"
+  },
+  "speedrun": "Speedrun",
+  "@marathon": {
+    "description": "Marathon game mode name"
+  },
+  "marathon": "Marathon",
+  "@survival": {
+    "description": "Survival game mode name"
+  },
+  "survival": "Survival",
+  "@duel": {
+    "description": "Duel game mode name"
+  },
+  "duel": "Duel",
+  "@deathmatch": {
+    "description": "Deathmatch game mode name"
+  },
+  "deathmatch": "Deathmatch",
+  "@bossBattle": {
+    "description": "Boss Battle game mode name"
+  },
+  "bossBattle": "Boss Battle",
+  "@chaos": {
+    "description": "Chaos game mode name"
+  },
+  "chaos": "Chaos",
+  "@blind": {
+    "description": "Blind game mode name"
+  },
+  "blind": "Blind",
+  "@reverse": {
+    "description": "Reverse game mode name"
+  },
+  "reverse": "Reverse",
+  "@coop": {
+    "description": "Co-op game mode name"
+  },
+  "coop": "Co-op",
+  "@categories": {
+    "description": "Categories screen title"
+  },
+  "categories": "Categories",
+  "@trivia": {
+    "description": "Trivia category name"
+  },
+  "trivia": "Trivia",
+  "@movies": {
+    "description": "Movies category name"
+  },
+  "movies": "Movies",
+  "@music": {
+    "description": "Music category name"
+  },
+  "music": "Music",
+  "@puzzles": {
+    "description": "Puzzles category name"
+  },
+  "puzzles": "Puzzles",
+  "@words": {
+    "description": "Words category name"
+  },
+  "words": "Words",
+  "@question": {
+    "description": "Question label"
+  },
+  "question": "Question",
+  "@answer": {
+    "description": "Answer label"
+  },
+  "answer": "Answer",
+  "@correct": {
+    "description": "Correct answer feedback"
+  },
+  "correct": "Correct!",
+  "@wrong": {
+    "description": "Wrong answer feedback"
+  },
+  "wrong": "Wrong!",
+  "@timeUp": {
+    "description": "Time expired feedback"
+  },
+  "timeUp": "Time's up!",
+  "@score": {
+    "description": "Current score label"
+  },
+  "score": "Score",
+  "@totalScore": {
+    "description": "Total score label"
+  },
+  "totalScore": "Total Score",
+  "@round": {
+    "description": "Round number label"
+  },
+  "round": "Round",
+  "@winner": {
+    "description": "Winner label"
+  },
+  "winner": "Winner",
+  "@youWon": {
+    "description": "Congratulations message for winning"
+  },
+  "youWon": "You won!",
+  "@youLost": {
+    "description": "Message for losing"
+  },
+  "youLost": "You lost!",
+  "@playAgain": {
+    "description": "Button to play another game"
+  },
+  "playAgain": "Play Again",
+  "@share": {
+    "description": "Share button"
+  },
+  "share": "Share",
+  "@home": {
+    "description": "Home navigation button"
+  },
+  "home": "Home",
+  "@loading": {
+    "description": "Loading indicator text"
+  },
+  "loading": "Loading...",
+  "@errorOccurred": {
+    "description": "Generic error message"
+  },
+  "errorOccurred": "An error occurred",
+  "@tryAgain": {
+    "description": "Button to retry after an error"
+  },
+  "tryAgain": "Try Again",
+  "@noInternet": {
+    "description": "No internet connection message"
+  },
+  "noInternet": "No internet connection",
+  "@noResults": {
+    "description": "No results found message"
+  },
+  "noResults": "No results found",
+  "@areYouSure": {
+    "description": "Confirmation prompt"
+  },
+  "areYouSure": "Are you sure?",
+  "@yes": {
+    "description": "Affirmative button"
+  },
+  "yes": "Yes",
+  "@no": {
+    "description": "Negative button"
+  },
+  "no": "No",
+  "@ok": {
+    "description": "OK button"
+  },
+  "ok": "OK",
+  "@points": {
+    "description": "Points label"
+  },
+  "points": "Points",
+  "@level": {
+    "description": "Player level label"
+  },
+  "level": "Level",
+  "@xp": {
+    "description": "Experience points label"
+  },
+  "xp": "XP",
+  "@coins": {
+    "description": "Coins/currency label"
+  },
+  "coins": "Coins",
+  "@rank": {
+    "description": "Player rank label"
+  },
+  "rank": "Rank",
+  "@winRate": {
+    "description": "Win rate percentage label"
+  },
+  "winRate": "Win Rate",
+  "@gamesPlayed": {
+    "description": "Games played count label"
+  },
+  "gamesPlayed": "Games Played",
+  "@gamesWon": {
+    "description": "Games won count label"
+  },
+  "gamesWon": "Games Won",
+  "@streak": {
+    "description": "Win streak label"
+  },
+  "streak": "Streak",
+  "@dailyBonus": {
+    "description": "Daily bonus label"
+  },
+  "dailyBonus": "Daily Bonus",
+  "@comingSoon": {
+    "description": "Coming soon label"
+  },
+  "comingSoon": "Coming Soon",
+  "@underConstruction": {
+    "description": "Under construction message"
+  },
+  "underConstruction": "Under Construction",
+  "@version": {
+    "description": "App version label"
+  },
+  "version": "Version",
+  "@privacyPolicy": {
+    "description": "Privacy policy link"
+  },
+  "privacyPolicy": "Privacy Policy",
+  "@termsOfService": {
+    "description": "Terms of service link"
+  },
+  "termsOfService": "Terms of Service",
+  "@notifications": {
+    "description": "Notifications setting label"
+  },
+  "notifications": "Notifications",
+  "@soundEffects": {
+    "description": "Sound effects setting label"
+  },
+  "soundEffects": "Sound Effects",
+  "@language": {
+    "description": "Language setting label"
+  },
+  "language": "Language",
+  "@theme": {
+    "description": "Theme setting label"
+  },
+  "theme": "Theme",
+  "@darkMode": {
+    "description": "Dark mode option"
+  },
+  "darkMode": "Dark Mode",
+  "@lightMode": {
+    "description": "Light mode option"
+  },
+  "lightMode": "Light Mode",
+  "@adminPanel": {
+    "description": "Admin panel title"
+  },
+  "adminPanel": "Admin Panel",
+  "@users": {
+    "description": "Users management label"
+  },
+  "users": "Users",
+  "@questions": {
+    "description": "Questions management label"
+  },
+  "questions": "Questions",
+  "@reports": {
+    "description": "Reports label"
+  },
+  "reports": "Reports",
+  "@analytics": {
+    "description": "Analytics label"
+  },
+  "analytics": "Analytics",
+  "@security": {
+    "description": "Security settings label"
+  },
+  "security": "Security",
+  "@enterprise": {
+    "description": "Enterprise features label"
+  },
+  "enterprise": "Enterprise",
+  "@monitoring": {
+    "description": "Monitoring label"
+  },
+  "monitoring": "Monitoring",
+  "@createRoom": {
+    "description": "Button to create a multiplayer room"
+  },
+  "createRoom": "Create Room",
+  "@joinRoom": {
+    "description": "Button to join a multiplayer room"
+  },
+  "joinRoom": "Join Room",
+  "@roomCode": {
+    "description": "Room code field label"
+  },
+  "roomCode": "Room Code",
+  "@waitingForPlayers": {
+    "description": "Waiting for players message"
+  },
+  "waitingForPlayers": "Waiting for players...",
+  "@players": {
+    "description": "Players list label"
+  },
+  "players": "Players",
+  "@host": {
+    "description": "Host label for room host"
+  },
+  "host": "Host",
+  "@inviteFriends": {
+    "description": "Button to invite friends"
+  },
+  "inviteFriends": "Invite Friends",
+  "@copyCode": {
+    "description": "Button to copy room code"
+  },
+  "copyCode": "Copy Code",
+  "@powerUps": {
+    "description": "Power-ups label"
+  },
+  "powerUps": "Power-ups",
+  "@doublePoints": {
+    "description": "Double points power-up"
+  },
+  "doublePoints": "Double Points",
+  "@skipQuestion": {
+    "description": "Skip question power-up"
+  },
+  "skipQuestion": "Skip Question",
+  "@freezeTime": {
+    "description": "Freeze time power-up"
+  },
+  "freezeTime": "Freeze Time",
+  "@revealAnswer": {
+    "description": "Reveal answer power-up"
+  },
+  "revealAnswer": "Reveal Answer",
+  "@shield": {
+    "description": "Shield power-up"
+  },
+  "shield": "Shield",
+  "@stealPoints": {
+    "description": "Steal points power-up"
+  },
+  "stealPoints": "Steal Points",
+  "@firstPlace": {
+    "description": "First place label"
+  },
+  "firstPlace": "1st Place",
+  "@secondPlace": {
+    "description": "Second place label"
+  },
+  "secondPlace": "2nd Place",
+  "@thirdPlace": {
+    "description": "Third place label"
+  },
+  "thirdPlace": "3rd Place"
+}

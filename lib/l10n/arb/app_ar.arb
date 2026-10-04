@@ -1,0 +1,484 @@
+{
+  "@@locale": "ar",
+  "@@nativeName": "العربية",
+  "@@appName": {
+    "description": "The name of the application"
+  },
+  "appName": "XO Game Show",
+  "@startGame": {
+    "description": "Button to start a new game"
+  },
+  "startGame": "بدء اللعبة",
+  "@newGame": {
+    "description": "Button to start a new game session"
+  },
+  "newGame": "لعبة جديدة",
+  "@continueGame": {
+    "description": "Button to continue an existing game"
+  },
+  "continueGame": "متابعة اللعبة",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "settings": "الإعدادات",
+  "@profile": {
+    "description": "Profile screen title"
+  },
+  "profile": "الملف الشخصي",
+  "@leaderboard": {
+    "description": "Leaderboard screen title"
+  },
+  "leaderboard": "لوحة المتصدرين",
+  "@achievements": {
+    "description": "Achievements screen title"
+  },
+  "achievements": "الإنجازات",
+  "@friends": {
+    "description": "Friends list screen title"
+  },
+  "friends": "الأصدقاء",
+  "@logout": {
+    "description": "Button to log out of the account"
+  },
+  "logout": "تسجيل الخروج",
+  "@login": {
+    "description": "Button to log in"
+  },
+  "login": "تسجيل الدخول",
+  "@signUp": {
+    "description": "Button to create a new account"
+  },
+  "signUp": "إنشاء حساب",
+  "@email": {
+    "description": "Email address field label"
+  },
+  "email": "البريد الإلكتروني",
+  "@password": {
+    "description": "Password field label"
+  },
+  "password": "كلمة المرور",
+  "@confirmPassword": {
+    "description": "Confirm password field label"
+  },
+  "confirmPassword": "تأكيد كلمة المرور",
+  "@displayName": {
+    "description": "Display name field label"
+  },
+  "displayName": "الاسم المعروض",
+  "@forgotPassword": {
+    "description": "Link to reset forgotten password"
+  },
+  "forgotPassword": "نسيت كلمة المرور؟",
+  "@sendResetLink": {
+    "description": "Button to send password reset link"
+  },
+  "sendResetLink": "إرسال رابط إعادة التعيين",
+  "@orContinueWith": {
+    "description": "Label before social login options"
+  },
+  "orContinueWith": "أو متابعة باستخدام",
+  "@googleSignIn": {
+    "description": "Button to sign in with Google"
+  },
+  "googleSignIn": "تسجيل الدخول بواسطة Google",
+  "@appleSignIn": {
+    "description": "Button to sign in with Apple"
+  },
+  "appleSignIn": "تسجيل الدخول بواسطة Apple",
+  "@playerName": {
+    "description": "Player name field label"
+  },
+  "playerName": "اسم اللاعب",
+  "@addPlayer": {
+    "description": "Button to add a player"
+  },
+  "addPlayer": "إضافة لاعب",
+  "@removePlayer": {
+    "description": "Button to remove a player"
+  },
+  "removePlayer": "إزالة لاعب",
+  "@start": {
+    "description": "Generic start button"
+  },
+  "start": "بدء",
+  "@cancel": {
+    "description": "Generic cancel button"
+  },
+  "cancel": "إلغاء",
+  "@confirm": {
+    "description": "Generic confirm button"
+  },
+  "confirm": "تأكيد",
+  "@save": {
+    "description": "Generic save button"
+  },
+  "save": "حفظ",
+  "@delete": {
+    "description": "Generic delete button"
+  },
+  "delete": "حذف",
+  "@edit": {
+    "description": "Generic edit button"
+  },
+  "edit": "تعديل",
+  "@search": {
+    "description": "Search field placeholder"
+  },
+  "search": "بحث",
+  "@gameModes": {
+    "description": "Game modes screen title"
+  },
+  "gameModes": "أنماط اللعبة",
+  "@classic": {
+    "description": "Classic game mode name"
+  },
+  "classic": "كلاسيكي",
+  "@battleRoyale": {
+    "description": "Battle Royale game mode name"
+  },
+  "battleRoyale": "معركة ملكية",
+  "@speedrun": {
+    "description": "Speedrun game mode name"
+  },
+  "speedrun": "سباق السرعة",
+  "@marathon": {
+    "description": "Marathon game mode name"
+  },
+  "marathon": "ماراثون",
+  "@survival": {
+    "description": "Survival game mode name"
+  },
+  "survival": "بقاء",
+  "@duel": {
+    "description": "Duel game mode name"
+  },
+  "duel": "مبارزة",
+  "@deathmatch": {
+    "description": "Deathmatch game mode name"
+  },
+  "deathmatch": "موت مفاجئ",
+  "@bossBattle": {
+    "description": "Boss Battle game mode name"
+  },
+  "bossBattle": "معركة الزعيم",
+  "@chaos": {
+    "description": "Chaos game mode name"
+  },
+  "chaos": "فوضى",
+  "@blind": {
+    "description": "Blind game mode name"
+  },
+  "blind": "أعمى",
+  "@reverse": {
+    "description": "Reverse game mode name"
+  },
+  "reverse": "عكسي",
+  "@coop": {
+    "description": "Co-op game mode name"
+  },
+  "coop": "تعاوني",
+  "@categories": {
+    "description": "Categories screen title"
+  },
+  "categories": "الفئات",
+  "@trivia": {
+    "description": "Trivia category name"
+  },
+  "trivia": "أسئلة عامة",
+  "@movies": {
+    "description": "Movies category name"
+  },
+  "movies": "أفلام",
+  "@music": {
+    "description": "Music category name"
+  },
+  "music": "موسيقى",
+  "@puzzles": {
+    "description": "Puzzles category name"
+  },
+  "puzzles": "ألغاز",
+  "@words": {
+    "description": "Words category name"
+  },
+  "words": "كلمات",
+  "@question": {
+    "description": "Question label"
+  },
+  "question": "سؤال",
+  "@answer": {
+    "description": "Answer label"
+  },
+  "answer": "إجابة",
+  "@correct": {
+    "description": "Correct answer feedback"
+  },
+  "correct": "صحيح!",
+  "@wrong": {
+    "description": "Wrong answer feedback"
+  },
+  "wrong": "خطأ!",
+  "@timeUp": {
+    "description": "Time expired feedback"
+  },
+  "timeUp": "انتهى الوقت!",
+  "@score": {
+    "description": "Current score label"
+  },
+  "score": "النقاط",
+  "@totalScore": {
+    "description": "Total score label"
+  },
+  "totalScore": "مجموع النقاط",
+  "@round": {
+    "description": "Round number label"
+  },
+  "round": "جولة",
+  "@winner": {
+    "description": "Winner label"
+  },
+  "winner": "الفائز",
+  "@youWon": {
+    "description": "Congratulations message for winning"
+  },
+  "youWon": "لقد فزت!",
+  "@youLost": {
+    "description": "Message for losing"
+  },
+  "youLost": "لقد خسرت!",
+  "@playAgain": {
+    "description": "Button to play another game"
+  },
+  "playAgain": "العب مرة أخرى",
+  "@share": {
+    "description": "Share button"
+  },
+  "share": "مشاركة",
+  "@home": {
+    "description": "Home navigation button"
+  },
+  "home": "الرئيسية",
+  "@loading": {
+    "description": "Loading indicator text"
+  },
+  "loading": "جارٍ التحميل...",
+  "@errorOccurred": {
+    "description": "Generic error message"
+  },
+  "errorOccurred": "حدث خطأ",
+  "@tryAgain": {
+    "description": "Button to retry after an error"
+  },
+  "tryAgain": "حاول مرة أخرى",
+  "@noInternet": {
+    "description": "No internet connection message"
+  },
+  "noInternet": "لا يوجد اتصال بالإنترنت",
+  "@noResults": {
+    "description": "No results found message"
+  },
+  "noResults": "لم يتم العثور على نتائج",
+  "@areYouSure": {
+    "description": "Confirmation prompt"
+  },
+  "areYouSure": "هل أنت متأكد؟",
+  "@yes": {
+    "description": "Affirmative button"
+  },
+  "yes": "نعم",
+  "@no": {
+    "description": "Negative button"
+  },
+  "no": "لا",
+  "@ok": {
+    "description": "OK button"
+  },
+  "ok": "موافق",
+  "@points": {
+    "description": "Points label"
+  },
+  "points": "نقاط",
+  "@level": {
+    "description": "Player level label"
+  },
+  "level": "المستوى",
+  "@xp": {
+    "description": "Experience points label"
+  },
+  "xp": "نقاط الخبرة",
+  "@coins": {
+    "description": "Coins/currency label"
+  },
+  "coins": "عملات",
+  "@rank": {
+    "description": "Player rank label"
+  },
+  "rank": "الترتيب",
+  "@winRate": {
+    "description": "Win rate percentage label"
+  },
+  "winRate": "نسبة الفوز",
+  "@gamesPlayed": {
+    "description": "Games played count label"
+  },
+  "gamesPlayed": "المباريات الملعوبة",
+  "@gamesWon": {
+    "description": "Games won count label"
+  },
+  "gamesWon": "المباريات المُربحة",
+  "@streak": {
+    "description": "Win streak label"
+  },
+  "streak": "سلسلة الانتصارات",
+  "@dailyBonus": {
+    "description": "Daily bonus label"
+  },
+  "dailyBonus": "المكافأة اليومية",
+  "@comingSoon": {
+    "description": "Coming soon label"
+  },
+  "comingSoon": "قريباً",
+  "@underConstruction": {
+    "description": "Under construction message"
+  },
+  "underConstruction": "قيد الإنشاء",
+  "@version": {
+    "description": "App version label"
+  },
+  "version": "الإصدار",
+  "@privacyPolicy": {
+    "description": "Privacy policy link"
+  },
+  "privacyPolicy": "سياسة الخصوصية",
+  "@termsOfService": {
+    "description": "Terms of service link"
+  },
+  "termsOfService": "شروط الخدمة",
+  "@notifications": {
+    "description": "Notifications setting label"
+  },
+  "notifications": "الإشعارات",
+  "@soundEffects": {
+    "description": "Sound effects setting label"
+  },
+  "soundEffects": "المؤثرات الصوتية",
+  "@language": {
+    "description": "Language setting label"
+  },
+  "language": "اللغة",
+  "@theme": {
+    "description": "Theme setting label"
+  },
+  "theme": "المظهر",
+  "@darkMode": {
+    "description": "Dark mode option"
+  },
+  "darkMode": "الوضع الداكن",
+  "@lightMode": {
+    "description": "Light mode option"
+  },
+  "lightMode": "الوضع الفاتح",
+  "@adminPanel": {
+    "description": "Admin panel title"
+  },
+  "adminPanel": "لوحة الإدارة",
+  "@users": {
+    "description": "Users management label"
+  },
+  "users": "المستخدمون",
+  "@questions": {
+    "description": "Questions management label"
+  },
+  "questions": "الأسئلة",
+  "@reports": {
+    "description": "Reports label"
+  },
+  "reports": "التقارير",
+  "@analytics": {
+    "description": "Analytics label"
+  },
+  "analytics": "التحليلات",
+  "@security": {
+    "description": "Security settings label"
+  },
+  "security": "الأمان",
+  "@enterprise": {
+    "description": "Enterprise features label"
+  },
+  "enterprise": "المؤسسات",
+  "@monitoring": {
+    "description": "Monitoring label"
+  },
+  "monitoring": "المراقبة",
+  "@createRoom": {
+    "description": "Button to create a multiplayer room"
+  },
+  "createRoom": "إنشاء غرفة",
+  "@joinRoom": {
+    "description": "Button to join a multiplayer room"
+  },
+  "joinRoom": "انضمام إلى غرفة",
+  "@roomCode": {
+    "description": "Room code field label"
+  },
+  "roomCode": "رمز الغرفة",
+  "@waitingForPlayers": {
+    "description": "Waiting for players message"
+  },
+  "waitingForPlayers": "انتظار اللاعبين...",
+  "@players": {
+    "description": "Players list label"
+  },
+  "players": "اللاعبون",
+  "@host": {
+    "description": "Host label for room host"
+  },
+  "host": "المضيف",
+  "@inviteFriends": {
+    "description": "Button to invite friends"
+  },
+  "inviteFriends": "دعوة الأصدقاء",
+  "@copyCode": {
+    "description": "Button to copy room code"
+  },
+  "copyCode": "نسخ الرمز",
+  "@powerUps": {
+    "description": "Power-ups label"
+  },
+  "powerUps": "تعزيزات",
+  "@doublePoints": {
+    "description": "Double points power-up"
+  },
+  "doublePoints": "نقاط مضاعفة",
+  "@skipQuestion": {
+    "description": "Skip question power-up"
+  },
+  "skipQuestion": "تخطي السؤال",
+  "@freezeTime": {
+    "description": "Freeze time power-up"
+  },
+  "freezeTime": "تجميد الوقت",
+  "@revealAnswer": {
+    "description": "Reveal answer power-up"
+  },
+  "revealAnswer": "كشف الإجابة",
+  "@shield": {
+    "description": "Shield power-up"
+  },
+  "shield": "درع",
+  "@stealPoints": {
+    "description": "Steal points power-up"
+  },
+  "stealPoints": "سرقة النقاط",
+  "@firstPlace": {
+    "description": "First place label"
+  },
+  "firstPlace": "المركز الأول",
+  "@secondPlace": {
+    "description": "Second place label"
+  },
+  "secondPlace": "المركز الثاني",
+  "@thirdPlace": {
+    "description": "Third place label"
+  },
+  "thirdPlace": "المركز الثالث"
+}

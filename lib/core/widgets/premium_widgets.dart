@@ -340,6 +340,18 @@ class ComicScoreChip extends StatelessWidget {
 typedef UltraGlass = ComicCard;
 typedef NeonButton = ComicButton;
 
+/// Standard snackbar (docs/DESIGN_SYSTEM.md §7): floating, black bg, w800 text.
+void showComicSnack(BuildContext context, String message, {bool error = false}) {
+  ScaffoldMessenger.of(context)
+    ..hideCurrentSnackBar()
+    ..showSnackBar(SnackBar(
+      content: Text(message,
+          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14)),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: error ? ComicColors.red : ComicColors.black,
+    ));
+}
+
 class MeshGradientBackground extends StatelessWidget {
   final Widget child;
   const MeshGradientBackground({super.key, required this.child});

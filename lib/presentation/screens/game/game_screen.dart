@@ -236,6 +236,27 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       },
     );
 
+    // The app is the host: when a player reaches the winning score the room
+    // finishes for everyone at the same time — no player decides the winner.
+    ref.listen<String?>(
+      roomSessionStreamProvider.select((p) => p.valueOrNull?.winnerId),
+      (prev, next) {
+        if (next != null && next.isNotEmpty && !_isWinnerDialogShown) {
+          _isWinnerDialogShown = true;
+          final players =
+              ref.read(roomSessionStreamProvider).valueOrNull?.players ?? const [];
+          String name = 'الفائز';
+          for (final p in players) {
+            if (p.id == next) {
+              name = p.name;
+              break;
+            }
+          }
+          _showFinalWinnerDialog(context, name);
+        }
+      },
+    );
+
     if (gameState.isLoading) {
       return const Scaffold(
         backgroundColor: Color(0xFFF0F7FF),
@@ -247,6 +268,20 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       _isWinnerDialogShown = true;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showFinalWinnerDialog(context, gameState.winnerId!);
+      });
+    }
+
+    // App-driven finish: if the questions run out before anyone hits the
+    // winning score, the app declares the current leader for every device.
+    if (isMultiplayer &&
+        gameState.questions.isNotEmpty &&
+        currentQuestionIndex >= gameState.questions.length &&
+        roomSession?.winnerId == null &&
+        syncedPlayers.isNotEmpty &&
+        !_isWinnerDialogShown) {
+      _isWinnerDialogShown = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showFinalWinnerDialog(context, syncedPlayers.first.name);
       });
     }
 
@@ -664,9 +699,13 @@ class _GameScreenState extends ConsumerState<GameScreen> {
             label: 'رجوع للرئيسية',
             color: ComicColors.green,
             textColor: Colors.white,
-            onTap: () {
+            onTap: () async {
               Navigator.pop(ctx);
-              context.go('/home');
+              // Leaving an online room cleans it up on the way out.
+              if (ref.read(currentRoomIdProvider) != null) {
+                await ref.read(roomNotifierProvider.notifier).leaveRoom();
+              }
+              if (context.mounted) context.go('/home');
             },
           ),
         ],
