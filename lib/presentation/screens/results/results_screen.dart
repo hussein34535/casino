@@ -30,11 +30,11 @@ class ResultsScreen extends ConsumerWidget {
       child: Scaffold(
         backgroundColor: const Color(0xFFFFFBE6),
         appBar: AppBar(
-          backgroundColor: ComicColors.green,
+          backgroundColor: ComicColors.ink,
           elevation: 0,
           title: const Text('🏆 النتائج!', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white, fontSize: 22)),
           automaticallyImplyLeading: false,
-          shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+          shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
         ),
         body: ComicBackground(
           bgColor: const Color(0xFFFFFBE6),

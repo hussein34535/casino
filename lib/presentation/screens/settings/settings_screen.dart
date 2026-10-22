@@ -38,10 +38,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     return Scaffold(
       backgroundColor: ComicColors.cream,
       appBar: AppBar(
-        backgroundColor: ComicColors.green,
+        backgroundColor: ComicColors.ink,
         elevation: 0,
         title: const Text('⚙️ الإعدادات', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white, fontSize: 20)),
-        shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+        shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
       ),
       body: ComicBackground(
         bgColor: ComicColors.cream,
@@ -63,13 +63,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       value: settings['notifications'] ?? true,
                       onChanged: (v) => _toggle('notifications', v),
                     ),
-                    const Divider(color: ComicColors.black, thickness: 1.5),
+                    const Divider(color: Color(0x14000000), thickness: 1),
                     _ComicSwitch(
                       emoji: '🔊', label: 'المؤثرات الصوتية', subtitle: 'أصوات اللعبة',
                       value: settings['soundFx'] ?? true,
                       onChanged: (v) => _toggle('soundFx', v),
                     ),
-                    const Divider(color: ComicColors.black, thickness: 1.5),
+                    const Divider(color: Color(0x14000000), thickness: 1),
                     _ComicSwitch(
                       emoji: '📳', label: 'الاهتزاز', subtitle: 'اهتزاز عند التفاعل',
                       value: settings['vibration'] ?? true,
@@ -86,7 +86,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 child: Column(
                   children: [
                     _MenuRow(emoji: '✅', label: 'العربية', trailing: const ComicTag(label: 'مفعلة', color: ComicColors.green, textColor: Colors.white)),
-                    const Divider(color: ComicColors.black, thickness: 1.5),
+                    const Divider(color: Color(0x14000000), thickness: 1),
                     Opacity(opacity: 0.4, child: _MenuRow(emoji: '🇺🇸', label: 'English', trailing: const ComicTag(label: 'قريباً', color: ComicColors.grey))),
                   ],
                 ),
@@ -100,7 +100,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   child: Column(
                     children: [
                       _MenuRow(emoji: '📧', label: 'البريد الإلكتروني', subtitle: user.email),
-                      const Divider(color: ComicColors.black, thickness: 1.5),
+                      const Divider(color: Color(0x14000000), thickness: 1),
                       GestureDetector(
                         onTap: () => _showDeleteAccountDialog(context),
                         child: _MenuRow(emoji: '🗑️', label: 'حذف الحساب', subtitle: 'سيتم حذف جميع بياناتك', labelColor: ComicColors.red),
@@ -127,13 +127,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 color: Colors.white,
                 child: Column(
                   children: [
-                    const _MenuRow(emoji: '🏷️', label: 'الإصدار', subtitle: '2.0.0 Comic Edition'),
-                    const Divider(color: ComicColors.black, thickness: 1.5),
+                    const _MenuRow(emoji: '🏷️', label: 'الإصدار', subtitle: '2.0.0 Game Show Edition'),
+                    const Divider(color: Color(0x14000000), thickness: 1),
                     GestureDetector(
                       onTap: () {},
                       child: const _MenuRow(emoji: '🔒', label: 'سياسة الخصوصية'),
                     ),
-                    const Divider(color: ComicColors.black, thickness: 1.5),
+                    const Divider(color: Color(0x14000000), thickness: 1),
                     GestureDetector(
                       onTap: () {},
                       child: const _MenuRow(emoji: '📋', label: 'شروط الاستخدام'),
@@ -156,13 +156,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         backgroundColor: ComicColors.cream,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
-          side: const BorderSide(color: ComicColors.black, width: 3),
+          side: const BorderSide(color: Color(0x24FFFFFF)),
         ),
         title: const Text('🗑️ حذف الحساب', textAlign: TextAlign.center,
           style: TextStyle(fontWeight: FontWeight.w900, color: ComicColors.red, fontSize: 20)),
         content: const Text(
           'هل أنت متأكد؟ لا يمكن التراجع! سيتم حذف جميع بياناتك بما في ذلك الألعاب والإنجازات.',
-          style: TextStyle(fontWeight: FontWeight.w700, color: ComicColors.black),
+          style: TextStyle(fontWeight: FontWeight.w700, color: ComicColors.light),
           textAlign: TextAlign.center,
         ),
         actions: [
@@ -170,7 +170,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: ComicColors.red,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: ComicColors.black, width: 2))),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0x24FFFFFF)))),
             onPressed: () {
               Navigator.pop(ctx);
               ScaffoldMessenger.of(context).showSnackBar(
@@ -197,7 +197,7 @@ class _SectionHeader extends StatelessWidget {
         children: [
           Text(emoji, style: const TextStyle(fontSize: 20)),
           const SizedBox(width: 8),
-          Text(title, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: ComicColors.black)),
+          Text(title, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: ComicColors.light)),
         ],
       ),
     );

@@ -91,6 +91,13 @@ flutter:
     # NOTE: subdirectories are NOT bundled via the parent entry in this
     # Flutter version, so every asset subdir must be listed explicitly.
     - assets/icons/
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo.ttf
+    - family: Lalezar
+      fonts:
+        - asset: assets/fonts/Lalezar-Regular.ttf
 
 flutter_launcher_icons:
   android: true

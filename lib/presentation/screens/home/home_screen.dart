@@ -65,8 +65,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   decoration: BoxDecoration(
                     color: ComicColors.yellow,
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: ComicColors.black, width: 2.5),
-                    boxShadow: const [BoxShadow(color: ComicColors.black, offset: Offset(4, 4), blurRadius: 0)],
+                    border: Border.all(color: Color(0x29FFFFFF)),
+                    boxShadow: const [BoxShadow(color: Color(0x59000000), offset: Offset(0, 10), blurRadius: 24)],
                   ),
                   child: const Row(
                     mainAxisSize: MainAxisSize.min,
@@ -88,7 +88,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 const SizedBox(height: 6),
                 const Text(
                   'اختار وضع اللعب!',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: ComicColors.black),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: ComicColors.light),
                 ),
               ],
             ),
@@ -101,8 +101,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               decoration: BoxDecoration(
                 color: ComicColors.blue,
                 shape: BoxShape.circle,
-                border: Border.all(color: ComicColors.black, width: 2.5),
-                boxShadow: const [BoxShadow(color: ComicColors.black, offset: Offset(3, 3), blurRadius: 0)],
+                border: Border.all(color: Color(0x29FFFFFF)),
+                boxShadow: const [BoxShadow(color: Color(0x59000000), offset: Offset(0, 10), blurRadius: 24)],
               ),
               child: const Icon(Icons.settings_rounded, color: Colors.white, size: 24),
             ),
@@ -202,7 +202,7 @@ class _BigModeCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white.withValues(alpha: 0.25),
               shape: BoxShape.circle,
-              border: Border.all(color: ComicColors.black, width: 2),
+              border: Border.all(color: Color(0x29FFFFFF)),
             ),
             child: Icon(Icons.arrow_forward_rounded, color: textColor, size: 24),
           ),

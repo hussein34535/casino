@@ -84,11 +84,11 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         backgroundColor: ComicColors.cream,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
-          side: const BorderSide(color: ComicColors.black, width: 4),
+          side: const BorderSide(color: Color(0x24FFFFFF)),
         ),
         title: const Text('🎯 من جاوب صح؟',
             textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.w900, color: ComicColors.black, fontSize: 24)),
+            style: TextStyle(fontWeight: FontWeight.w900, color: ComicColors.light, fontSize: 24)),
         content: SizedBox(
           width: double.maxFinite,
           child: ListView.builder(
@@ -141,7 +141,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         decoration: const BoxDecoration(
           color: ComicColors.cream,
           borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
-          border: Border(top: BorderSide(color: ComicColors.black, width: 4)),
+          border: Border(top: BorderSide(color: Color(0x24FFFFFF))),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -288,14 +288,14 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     return Scaffold(
       backgroundColor: ComicColors.cream,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: ComicColors.ink,
         elevation: 0,
         title: Text(
           '🎯 ${gameState.selectedCategories?.isNotEmpty == true ? gameState.selectedCategories!.join(" + ") : 'GAME'}',
-          style: const TextStyle(fontWeight: FontWeight.w900, color: ComicColors.black, fontSize: 14),
+          style: const TextStyle(fontWeight: FontWeight.w900, color: ComicColors.light, fontSize: 14),
         ),
         automaticallyImplyLeading: false,
-        shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+        shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
         actions: [
            Padding(
              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -340,15 +340,16 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                                       ],
                                     ),
                                     const SizedBox(height: 8),
-                                    const Text('أسرع! اكتب إجابتك الآن:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                                    const Text('أسرع! اكتب إجابتك الآن:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: ComicColors.ink)),
                                     const SizedBox(height: 12),
                                     TextField(
                                       controller: _answerController,
                                       autofocus: true,
                                       textAlign: TextAlign.center,
-                                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: ComicColors.ink),
                                       decoration: InputDecoration(
                                         hintText: 'الإجابة...',
+                                        hintStyle: const TextStyle(color: ComicColors.grey),
                                         filled: true,
                                         fillColor: Colors.white,
                                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: const BorderSide(width: 3)),
@@ -486,7 +487,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                                             decoration: BoxDecoration(
                                               color: ComicColors.red,
                                               borderRadius: BorderRadius.circular(12),
-                                              border: Border.all(color: ComicColors.black, width: 2)
+                                              border: Border.all(color: Color(0x29FFFFFF))
                                             ),
                                             child: Row(
                                               children: [
@@ -569,8 +570,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: const BoxDecoration(
-                      color: Colors.white,
-                      border: Border(top: BorderSide(color: ComicColors.black, width: 3)),
+                      color: ComicColors.ink,
+                      border: Border(top: BorderSide(color: Color(0x24FFFFFF))),
                     ),
                     child: Row(
                       children: [
@@ -590,13 +591,13 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                                       : ComicColors.red,
                                   borderRadius: BorderRadius.circular(15),
                                   border:
-                                      Border.all(color: ComicColors.black, width: 3),
+                                      Border.all(color: Color(0x29FFFFFF)),
                                   boxShadow: !isBuzzerClaimed
                                       ? const [
                                           BoxShadow(
-                                              color: ComicColors.black,
-                                              offset: Offset(4, 4),
-                                              blurRadius: 0)
+                                              color: Color(0x59000000),
+                                              offset: Offset(0, 10),
+                                              blurRadius: 24)
                                         ]
                                       : [],
                                 ),
@@ -672,12 +673,12 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       builder: (ctx) => AlertDialog(
         backgroundColor: ComicColors.yellow,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(32),
-          side: const BorderSide(color: ComicColors.black, width: 5),
+          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(color: Color(0x24FFFFFF)),
         ),
         title: const Text('🎉 بطل المسابقة! 🎉',
             textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 28, color: ComicColors.black)),
+            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 28, color: ComicColors.ink)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -691,7 +692,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
             const SizedBox(height: 20),
             const Text('مبروك الفوز يا بطل! استعد للمنافسة الجاية.',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16, color: ComicColors.ink)),
           ],
         ),
         actions: [

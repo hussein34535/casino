@@ -43,7 +43,7 @@ class ChallengeCard extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.w900,
                         fontSize: 15,
-                        color: ComicColors.black,
+                        color: ComicColors.light,
                       ),
                     ),
                     const SizedBox(height: 2),
@@ -63,7 +63,7 @@ class ChallengeCard extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: ComicColors.black, width: 2),
+              border: Border.all(color: Color(0x29FFFFFF)),
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(6),
@@ -110,14 +110,14 @@ class ChallengeCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: ComicColors.black, width: 2),
+        border: Border.all(color: Color(0x29FFFFFF)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 14, color: ComicColors.black),
+          Icon(icon, size: 14, color: ComicColors.light),
           const SizedBox(width: 4),
-          Text(text, style: const TextStyle(fontSize: 12, color: ComicColors.black, fontWeight: FontWeight.w900)),
+          Text(text, style: const TextStyle(fontSize: 12, color: ComicColors.light, fontWeight: FontWeight.w900)),
         ],
       ),
     );

@@ -91,11 +91,11 @@ class _XoTextFieldState extends State<XoTextField> {
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(widget.borderRadius),
-          borderSide: const BorderSide(color: ComicColors.black, width: 2.5),
+          borderSide: const BorderSide(color: Color(0x24FFFFFF)),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(widget.borderRadius),
-          borderSide: const BorderSide(color: ComicColors.black, width: 2.5),
+          borderSide: const BorderSide(color: Color(0x24FFFFFF)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(widget.borderRadius),

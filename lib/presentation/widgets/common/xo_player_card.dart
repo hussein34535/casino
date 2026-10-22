@@ -51,7 +51,7 @@ class XoPlayerCard extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: isWinner ? ComicColors.yellow : ComicColors.grey.withValues(alpha: 0.3),
-                border: Border.all(color: ComicColors.black, width: 1.5),
+                border: Border.all(color: Color(0x29FFFFFF)),
               ),
               child: Center(
                 child: Text('$rank', style: const TextStyle(

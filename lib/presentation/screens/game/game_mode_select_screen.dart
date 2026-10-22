@@ -28,6 +28,7 @@ class GameModeSelectScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: ComicColors.ink,
         title: const Text('اختر طور اللعب'),
       ),
       body: Padding(
@@ -73,7 +74,7 @@ class GameModeSelectScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(mode.nameAr,
-                                style: const TextStyle(color: ComicColors.black, fontWeight: FontWeight.w900, fontSize: 16),
+                                style: const TextStyle(color: ComicColors.light, fontWeight: FontWeight.w900, fontSize: 16),
                               ),
                               const SizedBox(height: 4),
                               Text(mode.description,
@@ -92,7 +93,7 @@ class GameModeSelectScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text('${config.questionCount} سؤال',
-                            style: const TextStyle(color: ComicColors.black, fontSize: 12, fontWeight: FontWeight.w900),
+                            style: const TextStyle(color: ComicColors.light, fontSize: 12, fontWeight: FontWeight.w900),
                           ),
                         ),
                       ],

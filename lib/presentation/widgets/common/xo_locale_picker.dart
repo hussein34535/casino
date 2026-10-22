@@ -15,7 +15,7 @@ class XoLocalePicker extends ConsumerWidget {
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-        side: BorderSide(color: ComicColors.black, width: 3),
+        side: BorderSide(color: Color(0x24FFFFFF)),
       ),
       builder: (_) => const XoLocalePicker(),
     );
@@ -56,7 +56,7 @@ class XoLocalePicker extends ConsumerWidget {
             width: 40,
             height: 4,
             decoration: BoxDecoration(
-              color: ComicColors.black,
+              color: ComicColors.light,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -65,7 +65,7 @@ class XoLocalePicker extends ConsumerWidget {
             'Select Language',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w900,
-                  color: ComicColors.black,
+                  color: ComicColors.light,
                 ),
           ),
           const SizedBox(height: 16),
@@ -117,7 +117,7 @@ class XoLocalePicker extends ConsumerWidget {
       decoration: BoxDecoration(
         color: ComicColors.yellow,
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: ComicColors.black, width: 1.5),
+        border: Border.all(color: Color(0x29FFFFFF)),
       ),
       alignment: Alignment.center,
       child: Text(

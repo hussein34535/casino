@@ -101,7 +101,7 @@ class MiniButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: ComicColors.black, width: 2),
+          border: Border.all(color: Color(0x29FFFFFF)),
         ),
         child: Icon(icon, color: Colors.white, size: 20),
       ),
@@ -130,13 +130,13 @@ class QuestionSection extends StatelessWidget {
     if (question == null) return const SizedBox();
 
     return ComicCard(
-      color: ComicColors.yellow,
+      color: ComicColors.white,
       shadowOffset: 7,
       child: Column(
         children: [
           Align(
             alignment: Alignment.topRight,
-            child: ComicTag(label: '❓ سؤال', color: ComicColors.orange),
+            child: ComicTag(label: '❓ سؤال', color: ComicColors.blue),
           ),
           const SizedBox(height: 12),
           if (question!.type == 'music') ...[

@@ -17,7 +17,7 @@ class XoOfflineBanner extends ConsumerWidget {
         padding: const EdgeInsets.all(8),
         decoration: const BoxDecoration(
           color: ComicColors.red,
-          border: Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+          border: Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
         ),
         child: const Text(
           'أنت غير متصل بالإنترنت',

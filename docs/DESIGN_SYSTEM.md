@@ -1,107 +1,140 @@
 # نظام التصميم الموحّد — Xo Game Show
 
 > **المرجع الوحيد للـ UI/UX في كل التطبيق.** أي شاشة جديدة أو تعديل لازم يتبعه.
-> النمط المعتمد: **Comic الفاتح** (كريمي + حدود سوداء + ظلال صلبة + إيموجي في العناوين).
+> النمط المعتمد: **مسرح اللعبة — Game Show Stage** (خلفية نيلية داكنة + كشافات +
+> كروت بيضاء + أصفر ذهبي). المرجع البصلي: `docs/ui_templates/01-game-show.html`.
 
 ## 1. لماذا هذه الوثيقة
 
-التطبيق كان يعاني من **3 أنماط تنافسية** في نفس الوقت:
+التطبيق مرّ بعدة أنماط تنافسية — الكل اتوحّد لصالح المسرح:
 
-| النمط | المكان | الحالة |
-|---|---|---|
-| **Comic (الفاتح)** ✅ | الرئيسية، التابات، شاشات اللعب | **القياسي المعتمد** |
-| Xo-Luxe (داكن/ذهبي) | auth، غرف الأونلاين | ❌ ملغى — تم تحويله لـ Comic |
-| AppColors (كحلي Material) | onboarding، gamification، admin | ❌ ملغى — ألوانه أُعيدت لـ Comic |
+| النمط | الحالة |
+|---|---|
+| **Game Show Stage** ✅ | **القياسي المعتمد لكل التطبيق** |
+| Comic الفاتح (كريمي + حدود سوداء + ظلال صلبة) | ❌ ملغى — استُبدل بالكامل (نفس أسماء الودجات، قيم جديدة) |
+| Xo-Luxe (داكن/ذهبي)، Danten (`core/design/`)، AppColors (كحلي) | ❌ ملغى من قبل |
 
 ## 2. الألوان — `ComicColors` (من `core/widgets/premium_widgets.dart`)
 
+### الخلفيات والأسطح
+
 | Token | القيمة | الاستخدام |
 |---|---|---|
-| `yellow` | `0xFFFFD600` | اللون الأساسي، أزرار التمييز، هايلايت |
-| `orange` | `0xFFFF6B00` | ثانوي دافئ، تدرّجات |
-| `red` | `0xFFFF1F4B` | خطأ/خطر/تحذير |
-| `blue` | `0xFF0066FF` | أزرار "التالي"/روابط، AppBar أزرق |
-| `skyBlue` | `0xFF00C2FF` | تمييز فاتح |
-| `green` | `0xFF00D26A` | نجاح/تأكيد |
-| `purple` | `0xFF8B2BE2` | AppBar أخضر-بنفسجي لاختيار الفئة |
-| `pink` | `0xFFFF3DDD` | تمييز نادر |
-| `grey` | `0xFF888888` | نصوص ثانوية، عناصر معطّلة |
-| `black` | `0xFF1A1A1A` | كل الحدود + النصوص الأساسية |
-| `white` | `0xFFFFFBF0` | خلفية البطاقات (أبيض دافئ) |
-| `cream` | `0xFFFFF8DC` | خلفية الصفحات |
+| `stage` | `0xFF161046` | خلفية الصفحات الأساسية (نيلي عميق) |
+| `stage2` | `0xFF241A6B` | طبقات فوقها + خلفية الحوارات |
+| `ink` | `0xFF14123A` | AppBars، الشريط السفلي، نص على الأصفر/الأبيض |
+| `white` | `0xFFFFFFFF` | كروت المحتوى (بيضاء صافية) |
+| `cream` | = `stage` | اسم قديم محفوظ للتوافق — يرجع النيلي |
 
-**رموز الخلفيات الموحّدة** (تُستبدل أي ألوان hardcoded قديمة):
-- خلفية صفحة فاتحة: `ComicColors.cream`
-- خلفية بطاقة: `ComicColors.white`
-- لا تُستخدم `Color(0x...)` يدويًا في الشاشات — فقط عبر `ComicColors`
+### ألوان العلامة
 
-## 3. الودجات — `core/widgets/premium_widgets.dart`
-
-| الودجة | تُستخدم لـ | ملاحظات |
+| Token | القيمة | الاستخدام |
 |---|---|---|
-| `ComicCard` | كل البطاقات والأقسام | حد أسود **3px** + ظل صلب `(6,6) blur:0` + radius 20 |
-| `ComicButton` | كل الأزرار الرئيسية | حد أسود 3px + radius 18 + ظل يزول عند الضغط |
-| `ComicBackground` | خلفية كل صفحة | نقاط halftone فوق `bgColor` |
-| `ComicTag` | شارات صغيرة/أزرار ثانوية | حد 2.5px + ظل `(3,3)` + radius 10 |
-| `ComicBadge` | عدّادات (Q: 3، نقاط) | دائري + حد 2.5px |
-| `ComicScoreChip` | عرض النقاط | radius 30 |
+| `yellow` / `gold` | `0xFFFFD60A` | اللون الأساسي: أزرار، الشارة العلوية، العنصر النشط |
+| `goldShadow` | `0xFFB79300` | الظل الذهبي تحت الأزرار الصفراء |
+| `red` | `0xFFFF2E4C` | خطر/خطأ/بطاقة حمراء |
+| `orange` | `0xFFFF6B00` | تمييز دافئ ثانوي |
+| `blue` | `0xFF2E6BFF` | "التالي"/روابط/أزرار إجراء |
+| `cyan` | `0xFF3BE0FF` | تركيز الحقول، توهج مختار |
+| `green` | `0xFF00D26A` | نجاح/تأكيد |
+| `purple` | `0xFF5A3BFF` | تمييز نادر |
+| `pink` | `0xFFFF3DDD` | تمييز نادر |
+
+### النصوص
+
+| Token | القيمة | الاستخدام |
+|---|---|---|
+| `light` | `0xFFEDEBFF` | النص الأساسي **على الخلفية الداكنة** |
+| `lightMuted` | `0xFFB9B4E8` | نص ثانوي على الداكن |
+| `navMuted` | `0xFF8F8AC4` | نصوص التاب غير النشط + hint على الداكن |
+| `black` | = `ink` | النص الأساسي **على الأبيض/الأصفر** |
+| `grey` | `0xFF6A67A6` | نص ثانوي على الأبيض |
+
+### حدود وزخارف
+
+| Token | القيمة | الاستخدام |
+|---|---|---|
+| `line` | `0xFFE7E5F7` | خطوط فاصلة على الأبيض |
+| شفاف أبيض | `Color(0x29FFFFFF)` (16%) | حدود الكروت/الكبسولات على الداكن |
+| شفاف أبيض | `Color(0x24FFFFFF)` (14%) | حدود ثانوية + فواصل AppBar |
+| ظل ناعم | `Color(0x59000000)` + `Offset(0, 10)` + `blur 24` | **الظل الوحيد المسموح** |
+
+## 3. الخطوط
+
+- **الجسم والعناوين**: `Cairo` — `kStageBodyFont` (من `assets/fonts/Cairo.ttf`)، من الثيم.
+- **الأرقام والعرض الكبير**: `Lalezar` — `kStageDisplayFont` (من `assets/fonts/Lalezar-Regular.ttf`)
+  للنقاس، الأكواد، المؤقتات، النتائج (`ComicScoreChip` تستخدمه تلقائيًا).
+- الأوزان: عناوين w900، نصوص w700، ثانوي w600.
+
+## 4. الودجات — `core/widgets/premium_widgets.dart`
+
+| الودجة | السلوك |
+|---|---|
+| `ComicCard` | كرت **أبيض بلا حدود**، radius 16، ظل ناعم `(0,12) blur:30`. يفرض تلقائيًا لون نص/أيقونة يقرأ حسب سطح البطاقة (فاتح → ink، غامق → أبيض) — النصوص بدون لون جوّاه صارت مقروءة تلقائيًا. |
+| `ComicButton` | زر **أصفر** بظل ذهبي صلب `(0,5) blur:0` تحته، يهبط `translate(0,5)` عند الضغط. نص ink افتراضيًا. |
+| `ComicBackground` | خلفية الصفحة: **كشافات radial spotlight** (stage2 فوق stage) — لا نقاط halftone. |
+| `ComicTag` | كبسولة **صلبة** (pill) بلونها، نص ink على الألوان الفاتحة/أبيض على الغامقة تلقائيًا. |
+| `ComicBadge` | عدّادات مع توهج. |
+| `ComicScoreChip` | رقاقة نقاط بخط `Lalezar`. |
+| `showComicSnack` | SnackBar عائم بخلفية ink ونص light. |
 
 **قواعد:**
-- أي بطاقة/زر/شارة → من `premium_widgets` بس. ❌ مافيش `Container` يعيد اختراع بطاقة.
-- `ElevatedButton`/`Card` الخام ممنوع في الشاشات — استخدم Comic.
-- الأيقونات داخل الأزرار: `ComicButton.icon` تقبل `IconData` (Material) للتوافق.
-
-## 4. الأيقونات — `XoIcon` (SVG من `assets/icons/*.svg`)
-
-- أيقونات الواجهة (أزرار، تبويبات، سكشنات) → `XoIcon('wifi')` إلخ من Lucide.
-- الأسماء المتوفرة موثقة في `lib/core/design/xo_icon.dart`. أيقونة ناقصة؟ نزّلها من
-  `https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/<name>.svg`
-  إلى `assets/icons/` (مُصرَّح في pubspec بـ `assets/icons/`).
-- **الإيموجي مسموح** في عناوين الشاشات وأسماء الأوضاع (هوية Comic) — `🎯 اختر فئة`.
-- أيقونات Material (`Icons.*`) مسموحة فقط داخل `ComicButton`/حالة لا توجد لها بديلة SVG.
+- أي بطاقة/زر/شارة → من `premium_widgets` أو `presentation/widgets/common/xo_card.dart` بس.
+- `XoCard` (common): خلفية بيضاء صافية فوق أي تدرّج (الgradient طبقة غسيل فوق اللون)،
+  بدون حد افتراضي، radius 16، نفس قاعدة لون النص التلقائي.
+- الأيقونات: `XoIcon` (SVG من `assets/icons/`) — الإيموجي مسموح في العناوين.
 
 ## 5. بنية الصفحة
 
 ```dart
 Scaffold(
-  backgroundColor: ComicColors.cream,          // أو لون فاتح hardcoded قديم موحّد
+  backgroundColor: ComicColors.stage,
   appBar: AppBar(
-    backgroundColor: <لون ComicColor>,           // ملوّن، مختلف لكل قسم
+    backgroundColor: ComicColors.ink,          // موحّد لكل الشاشات
     elevation: 0,
-    shape: Border(bottom: BorderSide(color: ComicColors.black, width: 3)),  // إلزامي
-    title: Text('🎯 العنوان', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white, fontSize: 20)),
+    shape: Border(bottom: BorderSide(color: Color(0x24FFFFFF))),  // خط أبيض 14%
+    title: Text('🏆 العنوان', style: TextStyle(fontWeight: FontWeight.w900, color: ComicColors.light, fontSize: 20)),
   ),
-  body: ComicBackground(bgColor: ..., dotColor: <لون AppBar>),
+  body: ComicBackground(bgColor: ComicColors.stage, dotColor: ComicColors.stage2, child: ...),
 )
 ```
 
-- **العنوان**: إيموجي + نص، `FontWeight.w900`.
-- `Scaffold.backgroundColor` و `ComicBackground.bgColor` = **نفس اللون**.
-- خطوط: `Cairo` من الثيم — العناوين w900، النصوص w700، الثانوي w600.
+- **Bottom nav** (`main_scaffold`): خلفية `Color(0xB80A0728)` + خط علوي أبيض 12%،
+  العنصر النشط `yellow`، غير النشط `navMuted`.
+- الحقول: تعبئة `Colors.white @ 8%` + حد أبيض 28% + تركيز `cyan` + نص `light`.
+- الحوارات: `dialogTheme` = خلفية `stage2` + نصوص `light` (حوار على أصفر/أبيض ← حدّد نصوص ink صريحة).
+- SnackBars: خلفية `ink` + نص `light` (من الثيم).
 
-## 6. المسافات والأشكال
+## 6. قواعد النص وال_contrast (إلزامية)
 
-- Radius: بطاقة 20، زر 18، شارة/حقل صغير 10–16.
-- الحدود: `ComicColors.black` بعرض **3** للبطاقات، **2.5** للشارات.
-- الظلال: صلبة `BoxShadow(color: black, offset: Offset(N,N), blurRadius: 0)` بدل الظلال الناعمة.
+1. نص **بدون لون** داخل `ComicCard`/`XoCard` → يُلوَّن تلقائيًا حسب سطح البطاقة.
+   على أسطح صغيرة خارج الودجات (حوارات، كبسولات، حقول): حدّد لونًا صريحًا —
+   `ink`/`black` على الأبيض والأصفر، `light` على stage/stage2/ink.
+2. ❌ ممنوع `light`/`Colors.white` كنص فوق أسطح فاتحة (أبيض/أصفر/كريمي).
+3. فواصل داخل كروت بيضاء: `Divider(color: Color(0x14000000), thickness: 1)` —
+   ❌ لا فواصل سوداء غليظة.
 
-## 7. SnackBars والحوارات
+## 7. المسافات والأشكال
 
-- SnackBar: `ScaffoldMessenger` + `behavior: SnackBarBehavior.floating` + خلفية `ComicColors.black` + نص w800.
-- حوار: `AlertDialog` بـ `backgroundColor: ComicColors.cream/yellow` + حد أسود 3–5px + radius 24–32.
+- Radius: بطاقة **16**، حوار 20، زر 14–16، كبسولات/شارات `999` (pill).
+- الحدود: شفافة بيضاء فقط (`0x29FFFFFF`/`0x24FFFFFF`) — ❌ ممنوع حدود سوداء.
+- الظلال: ناعمة `(0,10) blur:24` فقط — ❌ ممنوع `blurRadius: 0` أو إزاحة صلبة (عدا ظل الذهب
+  المقصود تحت `ComicButton`).
 
-## 8. ممنوع (Deprecated) — لا تُستخدم في أي شاشة جديدة
+## 8. ممنوع (Deprecated)
 
-| العنصر | المسار | البديل |
-|---|---|---|
-| `XoDesign`، `XoScaffold`، `XoCard`، `XoButton`، `XoGlassCard`، `XoCodeInput`… | `core/design/xo_design.dart`, `xo_widgets.dart` | `ComicColors` + `premium_widgets` |
-| `AppColors.darkBlue/surfaceDark/cardDark` كخلفيات | `core/theme/app_theme.dart` | `ComicColors.cream/white` |
-| `XoCard`/`XoButton` القديمة (كحلي شفاف) | `presentation/widgets/common/` | أُعيدت تهيئتها لـ Comic — استمر باستخدامها كما هي |
-| خلفيات `Color(0xFFF0F7FF)` و`0xFFFFF5CC` المتشعبة | شاشات قديمة | `ComicColors.cream` |
+| العنصر | البديل |
+|---|---|
+| كريمي/خلفيات فاتحة، حدود سوداء 3px، ظلال صلبة `(N,N) blur:0` (نمط Comic القديم) | stage + حدود شفافة + ظلال ناعمة |
+| `XoDesign`/`XoScaffold`/`XoCard`/`XoButton` من `core/design/` (Danten) | `premium_widgets` + `common/xo_card.dart` |
+| `AppColors.darkBlue` كخلفيات | `ComicColors.stage` |
+| gradient text، glassmorphism، radius > 16 للبطاقات، كروت متطابقة بدون hierarchy | — |
+| نص فاتح على سطح فاتح / نص داكن على سطح غامق | قاعدة §6 |
 
 ## 9. ملاحظات بنيوية
 
-- شاشات اللعب (game_screen, local_setup…) وقسم الجرس: **مرخصة بمظهر Comic** —
-  حدود سوداء + خلفيات فاتحة + ألوان `ComicColors` + `XoIcon` للأيقونات.
-- `AppTheme.lightTheme` أُعيد تهيئته لهوية Comic (Cairo، خلفية فاتحة، بطاقات بحدود).
-- اختصارات: أي تعديل UI جديد → حدّث هذا الملف أولًا.
+- الأسماء القديمة (`ComicColors`/`ComicCard`…) **محفوظة عمدًا** بقيم وتنفيذ جدد —
+  لا تُعاد تسميتها، ولا يُرجع تنفيذها للنمط القديم.
+- `AppTheme.lightTheme` هو ثيم التطبيق الفعلي: `brightness.dark` + أصفر primary.
+- شاشات auth/الغرف/التركيب/اللعب كلها مرخصة بمظهر المسرح — أي تعديل UI جديد
+  ← حدّث هذا الملف أولًا، والمرجع البصري `docs/ui_templates/01-game-show.html`.

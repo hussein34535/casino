@@ -51,14 +51,18 @@
 - DI: Riverpod providers only
 
 ## Design System (MANDATORY)
-- **اقرأ `docs/DESIGN_SYSTEM.md` قبل أي تعديل UI.** النمط الموحّد لكل التطبيق: **Comic الفاتح**
-  (كريمي + حدود سوداء 3px + ظلال صلبة + إيموجي في العناوين).
+- **اقرأ `docs/DESIGN_SYSTEM.md` قبل أي تعديل UI.** النمط الموحّد لكل التطبيق: **مسرح اللعبة
+  (Game Show Stage)** — خلفية نيلية `stage #161046` + كشافات + كروت بيضاء بلا حدود +
+  أصفر `#FFD60A` + خطوط Cairo/Lalezar (من `assets/fonts/`).
 - الألوان والودجات: `core/widgets/premium_widgets.dart` (`ComicColors`, `ComicCard`, `ComicButton`,
-  `ComicBackground`, `ComicTag`, `ComicBadge`) فقط.
+  `ComicBackground`, `ComicTag`, `ComicBadge`) + `presentation/widgets/common/xo_card.dart` (`XoCard`) فقط.
+  الأسماء القديمة "Comic" محفوظة عمدًا بقيم/تنفيذ المسرح الجديد — لا تُعاد تسمية ولا تُرجع قيمها القديمة.
 - الأيقونات: `XoIcon` (SVG من `assets/icons/`) — الإيموجي مسموح في العناوين.
-- ❌ ممنوع: `XoDesign`/`XoScaffold`/`XoCard`/`XoButton` من `core/design/` (نمط Danten ملغى)،
-  و`AppColors.darkBlue` كخلفيات.
-- كل شاشات auth/الغرف الأونلاين/gamification/admin أُعيدت لـ Comic — لا تُرجعها للأنماط القديمة.
+- قواعد صارمة: ظلال ناعمة `(0,10) blur:24` فقط (ممنوع `blurRadius: 0`)، حدود شفافة بيضاء فقط
+  (ممنوع حدود سوداء)، نص `light` على الغامق و`ink` على الأبيض/الأصفر فقط.
+- ❌ ممنوع: كريمي/أنماط Comic القديمة، `XoDesign`/`XoScaffold`/`XoButton` من `core/design/`
+  (نمط Danten ملغى)، `AppColors.darkBlue` كخلفيات، gradient text، radius > 16 للبطاقات.
+- المرجع البصري للقوالب: `docs/ui_templates/` (المختار: `01-game-show.html`).
 
 ## Key Features
 - Live streaming via `livekit_client` (route: `/live-stream/:gameId`)

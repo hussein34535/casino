@@ -98,16 +98,16 @@ class _OnlineEntryScreenState extends ConsumerState<OnlineEntryScreen> {
                 // ── Divider ───────────────────────────────────
                 Row(
                   children: [
-                    const Expanded(child: Divider(color: ComicColors.black)),
+                    const Expanded(child: Divider(color: ComicColors.light)),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: Text('أو تصفح الغرف',
                           style: const TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w800,
-                              color: ComicColors.black)),
+                              color: ComicColors.light)),
                     ),
-                    const Expanded(child: Divider(color: ComicColors.black)),
+                    const Expanded(child: Divider(color: ComicColors.light)),
                   ],
                 ),
                 const SizedBox(height: 16),
@@ -124,16 +124,16 @@ class _OnlineEntryScreenState extends ConsumerState<OnlineEntryScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: Row(
                     children: [
-                      const Expanded(child: Divider(color: ComicColors.black)),
+                      const Expanded(child: Divider(color: ComicColors.light)),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: Text('أو',
                             style: const TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w800,
-                                color: ComicColors.black)),
+                                color: ComicColors.light)),
                       ),
-                      const Expanded(child: Divider(color: ComicColors.black)),
+                      const Expanded(child: Divider(color: ComicColors.light)),
                     ],
                   ),
                 ),
@@ -188,12 +188,12 @@ class _ColorIcon extends StatelessWidget {
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: ComicColors.black, width: 2.5),
+        border: Border.all(color: Color(0x29FFFFFF)),
         boxShadow: const [
-          BoxShadow(color: ComicColors.black, offset: Offset(3, 3), blurRadius: 0),
+          BoxShadow(color: Color(0x59000000), offset: Offset(0, 10), blurRadius: 24),
         ],
       ),
-      child: XoIcon(icon, color: ComicColors.black, size: 22),
+      child: XoIcon(icon, color: ComicColors.light, size: 22),
     );
   }
 }
@@ -290,9 +290,9 @@ class _BrowseSection extends ConsumerWidget {
           decoration: BoxDecoration(
             color: ComicColors.white,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: ComicColors.black, width: 3),
+            border: Border.all(color: Color(0x29FFFFFF)),
             boxShadow: const [
-              BoxShadow(color: ComicColors.black, offset: Offset(4, 4), blurRadius: 0),
+              BoxShadow(color: Color(0x59000000), offset: Offset(0, 10), blurRadius: 24),
             ],
           ),
           child: TextField(
@@ -450,7 +450,7 @@ class _SectionHeader extends StatelessWidget {
         const SizedBox(width: 8),
         Text(label,
             style: const TextStyle(
-                fontSize: 15, fontWeight: FontWeight.w900, color: ComicColors.black)),
+                fontSize: 15, fontWeight: FontWeight.w900, color: ComicColors.light)),
       ],
     );
   }
@@ -478,7 +478,7 @@ class _BotRoomCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: ComicColors.blue,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: ComicColors.black, width: 2.5),
+              border: Border.all(color: Color(0x29FFFFFF)),
             ),
             child: const XoIcon('brain', color: Colors.white, size: 24),
           ),
@@ -499,7 +499,7 @@ class _BotRoomCard extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: cat.color.withValues(alpha: 0.14),
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: ComicColors.black, width: 1.5),
+                        border: Border.all(color: Color(0x29FFFFFF)),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -536,9 +536,9 @@ class _BotRoomCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: ComicColors.yellow,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: ComicColors.black, width: 2.5),
+                border: Border.all(color: Color(0x29FFFFFF)),
                 boxShadow: const [
-                  BoxShadow(color: ComicColors.black, offset: Offset(3, 3), blurRadius: 0),
+                  BoxShadow(color: Color(0x59000000), offset: Offset(0, 10), blurRadius: 24),
                 ],
               ),
               child: isJoining
@@ -606,7 +606,7 @@ class _RoomCard extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: cat.color.withValues(alpha: 0.14),
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: ComicColors.black, width: 1.5),
+                        border: Border.all(color: Color(0x29FFFFFF)),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -647,9 +647,9 @@ class _RoomCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: ComicColors.blue,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: ComicColors.black, width: 2.5),
+                border: Border.all(color: Color(0x29FFFFFF)),
                 boxShadow: const [
-                  BoxShadow(color: ComicColors.black, offset: Offset(3, 3), blurRadius: 0),
+                  BoxShadow(color: Color(0x59000000), offset: Offset(0, 10), blurRadius: 24),
                 ],
               ),
               child: isJoining
@@ -757,7 +757,7 @@ class _CodeInputState extends State<_CodeInput> {
               maxLength: 6, // allows paste of full code
               onChanged: (v) => _onChanged(v, i),
               style: const TextStyle(
-                  fontSize: 24, fontWeight: FontWeight.w900, color: ComicColors.black),
+                  fontSize: 24, fontWeight: FontWeight.w900, color: ComicColors.light),
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               decoration: InputDecoration(
                 counterText: '',
@@ -766,7 +766,7 @@ class _CodeInputState extends State<_CodeInput> {
                 contentPadding: EdgeInsets.zero,
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: ComicColors.black, width: 2.5),
+                  borderSide: const BorderSide(color: Color(0x24FFFFFF)),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),

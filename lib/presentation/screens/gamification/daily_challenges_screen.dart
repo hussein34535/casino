@@ -18,9 +18,9 @@ class DailyChallengesScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: ComicColors.cream,
       appBar: AppBar(
-        backgroundColor: ComicColors.red,
+        backgroundColor: ComicColors.ink,
         title: const Text('التحديات', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 20)),
-        shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+        shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
       ),
       body: Directionality(
         textDirection: TextDirection.rtl,
@@ -40,7 +40,7 @@ class DailyChallengesScreen extends ConsumerWidget {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w900,
-                        color: ComicColors.black,
+                        color: ComicColors.light,
                       ),
                     ),
                   ],
@@ -70,7 +70,7 @@ class DailyChallengesScreen extends ConsumerWidget {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w900,
-                        color: ComicColors.black,
+                        color: ComicColors.light,
                       ),
                     ),
                   ],
@@ -100,7 +100,7 @@ class DailyChallengesScreen extends ConsumerWidget {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w900,
-                        color: ComicColors.black,
+                        color: ComicColors.light,
                       ),
                     ),
                   ],
@@ -130,7 +130,7 @@ class DailyChallengesScreen extends ConsumerWidget {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w900,
-                        color: ComicColors.black,
+                        color: ComicColors.light,
                       ),
                     ),
                   ],
@@ -180,14 +180,14 @@ class _StreakRewardRow extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: claimed ? ComicColors.green : ComicColors.yellow,
-              border: Border.all(color: ComicColors.black, width: 2),
+              border: Border.all(color: Color(0x29FFFFFF)),
             ),
-            child: Icon(icon, size: 18, color: ComicColors.black),
+            child: Icon(icon, size: 18, color: ComicColors.light),
           ),
           const SizedBox(width: 12),
-          Text('اليوم $day', style: const TextStyle(color: ComicColors.black, fontWeight: FontWeight.w900)),
+          Text('اليوم $day', style: const TextStyle(color: ComicColors.light, fontWeight: FontWeight.w900)),
           const Spacer(),
-          Text(reward, style: const TextStyle(color: ComicColors.black, fontWeight: FontWeight.w800)),
+          Text(reward, style: const TextStyle(color: ComicColors.light, fontWeight: FontWeight.w800)),
           const SizedBox(width: 8),
           Icon(
             claimed ? Icons.check_circle : Icons.circle_outlined,

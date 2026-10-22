@@ -32,7 +32,7 @@ class ShopItemCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: ComicColors.cream,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: ComicColors.black, width: 2),
+                  border: Border.all(color: Color(0x29FFFFFF)),
                 ),
                 child: Icon(
                   _iconForCategory(item.category),
@@ -49,7 +49,7 @@ class ShopItemCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: ComicColors.red,
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: ComicColors.black, width: 1.5),
+                      border: Border.all(color: Color(0x29FFFFFF)),
                     ),
                     child: Text(
                       '-${item.discountPercent}%',
@@ -70,7 +70,7 @@ class ShopItemCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: ComicColors.yellow,
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: ComicColors.black, width: 1.5),
+                      border: Border.all(color: Color(0x29FFFFFF)),
                     ),
                     child: const Text(
                       'محدود',
@@ -137,7 +137,7 @@ class ShopItemCard extends StatelessWidget {
                     textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
-                      side: const BorderSide(color: ComicColors.black, width: 2),
+                      side: const BorderSide(color: Color(0x24FFFFFF)),
                     ),
                   ),
                   child: Text(canAfford ? 'شراء' : 'غير متاح'),

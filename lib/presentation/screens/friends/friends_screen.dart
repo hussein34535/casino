@@ -32,10 +32,10 @@ class _FriendsScreenState extends ConsumerState<FriendsScreen> {
     return Scaffold(
       backgroundColor: ComicColors.cream,
       appBar: AppBar(
-        backgroundColor: ComicColors.blue,
+        backgroundColor: ComicColors.ink,
         elevation: 0,
         title: const Text('👥 الأصدقاء', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white, fontSize: 20)),
-        shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 2)),
+        shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
       ),
       body: ComicBackground(
         bgColor: ComicColors.cream,
@@ -99,7 +99,7 @@ class _FriendsScreenState extends ConsumerState<FriendsScreen> {
                                       Container(
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          border: Border.all(color: ComicColors.black, width: 2),
+                                          border: Border.all(color: Color(0x29FFFFFF)),
                                         ),
                                         child: XoAvatar(imageUrl: friend.photoUrl, name: friend.displayName, size: 48, isOnline: isOnline),
                                       ),
@@ -164,16 +164,16 @@ class _FriendsScreenState extends ConsumerState<FriendsScreen> {
     return TextFormField(
       controller: _searchController,
       onChanged: (v) => setState(() => _searchQuery = v),
-      style: const TextStyle(fontWeight: FontWeight.w900, color: ComicColors.black),
+      style: const TextStyle(fontWeight: FontWeight.w900, color: ComicColors.light),
       decoration: InputDecoration(
         hintText: 'ابحث عن أصدقاء...',
-        hintStyle: const TextStyle(fontWeight: FontWeight.w900, color: Colors.black54),
-        prefixIcon: const Icon(Icons.search_rounded, color: ComicColors.black),
+        hintStyle: const TextStyle(fontWeight: FontWeight.w900, color: ComicColors.navMuted),
+        prefixIcon: const Icon(Icons.search_rounded, color: ComicColors.light),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: Colors.white.withValues(alpha: 0.08),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: ComicColors.black, width: 2.5)),
-        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: ComicColors.black, width: 2.5)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0x24FFFFFF))),
+        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0x24FFFFFF))),
         focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: ComicColors.blue, width: 3)),
       ),
     );
@@ -196,29 +196,29 @@ class _FriendsScreenState extends ConsumerState<FriendsScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: ComicColors.cream,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: const BorderSide(color: ComicColors.black, width: 3)),
-        title: const Text('أضف صديق جديد! 🎉', style: TextStyle(fontWeight: FontWeight.w900, color: ComicColors.black)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: const BorderSide(color: Color(0x24FFFFFF))),
+        title: const Text('أضف صديق جديد! 🎉', style: TextStyle(fontWeight: FontWeight.w900, color: ComicColors.light)),
         content: TextFormField(
           controller: emailController,
-          style: const TextStyle(fontWeight: FontWeight.w900, color: ComicColors.black),
+          style: const TextStyle(fontWeight: FontWeight.w900, color: ComicColors.light),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             hintText: 'البريد الإلكتروني للصديق',
-            hintStyle: const TextStyle(fontWeight: FontWeight.w900, color: Colors.black54),
-            prefixIcon: const Icon(Icons.email_rounded, color: ComicColors.black),
+            hintStyle: const TextStyle(fontWeight: FontWeight.w900, color: ComicColors.navMuted),
+            prefixIcon: const Icon(Icons.email_rounded, color: ComicColors.light),
             filled: true,
-            fillColor: Colors.white,
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: ComicColors.black, width: 2.5)),
-            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: ComicColors.black, width: 2.5)),
+            fillColor: Colors.white.withValues(alpha: 0.08),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0x24FFFFFF))),
+            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0x24FFFFFF))),
             focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: ComicColors.blue, width: 3)),
           ),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('إلغاء', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.black54))),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('إلغاء', style: TextStyle(fontWeight: FontWeight.w900, color: ComicColors.light))),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: ComicColors.yellow,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10), side: const BorderSide(color: ComicColors.black, width: 2.5))
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10), side: const BorderSide(color: Color(0x24FFFFFF)))
             ),
             onPressed: () {
               final email = emailController.text.trim();

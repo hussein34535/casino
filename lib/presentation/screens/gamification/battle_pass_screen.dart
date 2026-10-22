@@ -16,9 +16,9 @@ class BattlePassScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: ComicColors.cream,
       appBar: AppBar(
-        backgroundColor: ComicColors.orange,
+        backgroundColor: ComicColors.ink,
         title: const Text('بطاقة المعركة', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 20)),
-        shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+        shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
       ),
       body: seasonAsync.when(
         loading: () => const XoLoading(),
@@ -66,7 +66,7 @@ class BattlePassScreen extends ConsumerWidget {
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: ComicColors.black, width: 2),
+                          border: Border.all(color: Color(0x29FFFFFF)),
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
@@ -92,7 +92,7 @@ class BattlePassScreen extends ConsumerWidget {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w900,
-                    color: ComicColors.black,
+                    color: ComicColors.light,
                   ),
                 ),
                 const SizedBox(height: 8),

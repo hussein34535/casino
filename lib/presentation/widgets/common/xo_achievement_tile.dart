@@ -80,7 +80,7 @@ class XoAchievementTile extends StatelessWidget {
             decoration: BoxDecoration(
               color: color.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: ComicColors.black, width: 2),
+              border: Border.all(color: Color(0x29FFFFFF)),
             ),
             child: Icon(icon, color: color, size: 24),
           ),

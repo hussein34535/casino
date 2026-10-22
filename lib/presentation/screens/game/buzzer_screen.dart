@@ -24,11 +24,11 @@ class _BuzzerScreenState extends ConsumerState<BuzzerScreen> {
     return Scaffold(
       backgroundColor: ComicColors.cream,
       appBar: AppBar(
-        backgroundColor: ComicColors.red,
+        backgroundColor: ComicColors.ink,
         elevation: 0,
         title: Text(isHost ? '🎛️ شاشة التحكم (Host)' : '⚡ جرس المسابقة',
           style: const TextStyle(fontWeight: FontWeight.w900, color: Colors.white, fontSize: 20)),
-        shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+        shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
         actions: isHost ? [
           Padding(
             padding: const EdgeInsets.only(right: 12),
@@ -48,10 +48,10 @@ class _BuzzerScreenState extends ConsumerState<BuzzerScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFF5F5),
       appBar: AppBar(
-        backgroundColor: ComicColors.red,
+        backgroundColor: ComicColors.ink,
         elevation: 0,
         title: const Text('⚡ نظام الجرس', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white, fontSize: 20)),
-        shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+        shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
       ),
       body: ComicBackground(
         bgColor: const Color(0xFFFFF5F5),
@@ -94,7 +94,7 @@ class _BuzzerScreenState extends ConsumerState<BuzzerScreen> {
                         hintText: 'أدخل اسمك هنا...',
                         hintStyle: const TextStyle(color: Colors.black45),
                         filled: true, fillColor: ComicColors.cream,
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: ComicColors.black, width: 2)),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0x24FFFFFF))),
                         focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: ComicColors.red, width: 2.5)),
                       ),
                     ),
@@ -234,12 +234,14 @@ class _BuzzerScreenState extends ConsumerState<BuzzerScreen> {
                     decoration: BoxDecoration(
                       color: hasBuzzed ? ComicColors.green : ComicColors.red,
                       shape: BoxShape.circle,
-                      border: Border.all(color: ComicColors.black, width: 5),
+                      border: Border.all(color: Color(0x29FFFFFF)),
                       boxShadow: [
                         BoxShadow(
-                          color: ComicColors.black,
-                          offset: hasBuzzed ? const Offset(0, 0) : const Offset(8, 8),
-                          blurRadius: 0,
+                          color: hasBuzzed
+                              ? ComicColors.green.withValues(alpha: 0.5)
+                              : ComicColors.red.withValues(alpha: 0.5),
+                          offset: const Offset(0, 10),
+                          blurRadius: 30,
                         ),
                       ],
                     ),

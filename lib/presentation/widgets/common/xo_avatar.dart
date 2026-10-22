@@ -57,7 +57,7 @@ class XoAvatar extends StatelessWidget {
                 ? Border.all(color: ComicColors.black, width: borderWidth)
                 : null,
             boxShadow: showBorder
-                ? const [BoxShadow(color: ComicColors.black, blurRadius: 0, offset: Offset(3, 3))]
+                ? const [BoxShadow(color: Color(0x59000000), offset: Offset(0, 10), blurRadius: 24)]
                 : null,
           ),
           child: CircleAvatar(
@@ -86,7 +86,7 @@ class XoAvatar extends StatelessWidget {
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: ComicColors.green,
-                border: Border.fromBorderSide(BorderSide(color: ComicColors.black, width: 2)),
+                border: Border.fromBorderSide(BorderSide(color: Color(0x24FFFFFF))),
               ),
             ),
           ),

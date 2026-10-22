@@ -84,9 +84,9 @@ class XoBadge extends StatelessWidget {
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: ComicColors.black, width: 2),
+        border: Border.all(color: Color(0x29FFFFFF)),
         boxShadow: const [
-          BoxShadow(color: ComicColors.black, offset: Offset(2, 2), blurRadius: 0),
+          BoxShadow(color: Color(0x59000000), offset: Offset(0, 10), blurRadius: 24),
         ],
       ),
       child: Row(
@@ -127,7 +127,7 @@ class XoStatItem extends StatelessWidget {
       children: [
         Icon(icon, color: color ?? ComicColors.orange, size: 28),
         const SizedBox(height: 4),
-        Text(value, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: ComicColors.black)),
+        Text(value, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: ComicColors.light)),
         Text(label, style: const TextStyle(fontSize: 12, color: ComicColors.grey)),
       ],
     );

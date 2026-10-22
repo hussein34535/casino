@@ -36,10 +36,10 @@ class _ComicBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: const BoxDecoration(
-        color: ComicColors.white,
-        border: Border(top: BorderSide(color: ComicColors.black, width: 3)),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      decoration: BoxDecoration(
+        color: const Color(0xB80A0728),
+        border: Border(top: BorderSide(color: Colors.white.withValues(alpha: 0.12), width: 1.5)),
       ),
       child: SafeArea(
         top: false,
@@ -73,22 +73,29 @@ class _NavItem extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        curve: Curves.easeOutBack,
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        curve: Curves.easeOut,
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? ComicColors.yellow : Colors.transparent,
-          borderRadius: BorderRadius.circular(16),
-          border: isSelected ? Border.all(color: ComicColors.black, width: 2.5) : Border.all(color: Colors.transparent, width: 2.5),
-          boxShadow: isSelected ? const [BoxShadow(color: ComicColors.black, offset: Offset(3, 3), blurRadius: 0)] : [],
+          color: isSelected ? ComicColors.yellow.withValues(alpha: 0.14) : Colors.transparent,
+          borderRadius: BorderRadius.circular(14),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            XoIcon(icon, color: isSelected ? ComicColors.black : const Color(0xFF9E9E9E), size: isSelected ? 28 : 24),
-            if (isSelected) ...[
-              const SizedBox(height: 2),
-              Text(label, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 10, color: ComicColors.black)),
-            ]
+            XoIcon(
+              icon,
+              color: isSelected ? ComicColors.yellow : ComicColors.navMuted,
+              size: 23,
+            ),
+            const SizedBox(height: 3),
+            Text(
+              label,
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
+                fontSize: 10,
+                color: isSelected ? ComicColors.yellow : ComicColors.navMuted,
+              ),
+            ),
           ],
         ),
       ),

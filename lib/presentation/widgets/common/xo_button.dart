@@ -90,7 +90,7 @@ class XoButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius),
-              side: const BorderSide(color: ComicColors.black, width: 2.5),
+              side: const BorderSide(color: Color(0x24FFFFFF)),
             ),
             elevation: 0,
             minimumSize: expanded ? const Size(double.infinity, 48) : null,

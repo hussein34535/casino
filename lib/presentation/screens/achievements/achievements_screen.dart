@@ -26,9 +26,9 @@ class AchievementsScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: ComicColors.cream,
       appBar: AppBar(
-        backgroundColor: ComicColors.blue,
+        backgroundColor: ComicColors.ink,
         title: const Text('الإنجازات', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 20)),
-        shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+        shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
       ),
       body: achievementsAsync.when(
         loading: () => const XoShimmerLoading(itemCount: 6),

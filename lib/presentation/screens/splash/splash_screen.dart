@@ -104,7 +104,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                 style: TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.w900,
-                  color: ComicColors.black,
+                  color: ComicColors.ink,
                   letterSpacing: 2,
                 ),
               )
@@ -121,7 +121,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                 decoration: BoxDecoration(
                   color: ComicColors.white,
                   shape: BoxShape.circle,
-                  border: Border.all(color: ComicColors.black, width: 2),
+                  border: Border.all(color: Color(0x29FFFFFF)),
                 ),
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
@@ -147,9 +147,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: ComicColors.black, width: 4),
+        border: Border.all(color: Color(0x29FFFFFF)),
         boxShadow: const [
-          BoxShadow(color: ComicColors.black, offset: Offset(6, 6), blurRadius: 0),
+          BoxShadow(color: Color(0x59000000), offset: Offset(0, 10), blurRadius: 24),
         ],
       ),
       child: Text(

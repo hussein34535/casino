@@ -74,7 +74,7 @@ class XoGradientContainer extends StatelessWidget {
         boxShadow: boxShadow,
       ),
       foregroundDecoration: BoxDecoration(
-        border: border ?? Border.all(color: ComicColors.black, width: 2.5),
+        border: border ?? Border.all(color: Color(0x29FFFFFF)),
         borderRadius: BorderRadius.circular(borderRadius),
       ),
       child: child,

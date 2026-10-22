@@ -52,7 +52,7 @@ class XoSectionHeader extends StatelessWidget {
       child: Row(
         children: [
           Text(title, style: const TextStyle(
-            color: ComicColors.black,
+            color: ComicColors.light,
             fontWeight: FontWeight.w900,
             fontSize: 16,
           )),

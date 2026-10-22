@@ -30,10 +30,10 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
     return Scaffold(
       backgroundColor: ComicColors.cream,
       appBar: AppBar(
-        backgroundColor: ComicColors.orange,
+        backgroundColor: ComicColors.ink,
         elevation: 0,
         title: const Text('🏆 لوحة المتصدرين', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white, fontSize: 20)),
-        shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+        shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
       ),
       body: ComicBackground(
         bgColor: ComicColors.cream,

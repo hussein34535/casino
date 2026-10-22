@@ -86,7 +86,7 @@ class _XoTimerWidgetState extends State<XoTimerWidget> with TickerProviderStateM
                   style: TextStyle(
                     fontSize: widget.size * 0.35,
                     fontWeight: FontWeight.w900,
-                    color: ComicColors.black,
+                    color: ComicColors.light,
                   ),
                 ),
               ),

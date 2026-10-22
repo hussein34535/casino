@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:game_show_app/core/theme/app_theme.dart';
+import 'package:game_show_app/core/widgets/premium_widgets.dart';
 
 class AdminSystemLogsScreen extends ConsumerWidget {
   const AdminSystemLogsScreen({super.key});
@@ -9,6 +10,7 @@ class AdminSystemLogsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: ComicColors.ink,
         title: const Text('سجلات النظام'),
         actions: [
           PopupMenuButton<String>(

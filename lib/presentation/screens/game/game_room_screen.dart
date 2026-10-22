@@ -107,7 +107,7 @@ class _CreateRoomScreenState extends ConsumerState<CreateRoomScreen> {
           children: [
             const Text('اختر أنواع الأسئلة',
                 style: TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.w900, color: ComicColors.black)),
+                    fontSize: 20, fontWeight: FontWeight.w900, color: ComicColors.light)),
             const SizedBox(height: 4),
             const Text('يمكنك اختيار أكثر من نوع',
                 style: TextStyle(
@@ -138,7 +138,7 @@ class _CreateRoomScreenState extends ConsumerState<CreateRoomScreen> {
             const SizedBox(height: 20),
             const Text('أقصى عدد للاعبين',
                 style: TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.w900, color: ComicColors.black)),
+                    fontSize: 20, fontWeight: FontWeight.w900, color: ComicColors.light)),
             const SizedBox(height: 4),
             const Text('من 2 لـ 5 لاعبين',
                 style: TextStyle(
@@ -149,9 +149,9 @@ class _CreateRoomScreenState extends ConsumerState<CreateRoomScreen> {
               decoration: BoxDecoration(
                 color: ComicColors.white,
                 borderRadius: BorderRadius.circular(18),
-                border: Border.all(color: ComicColors.black, width: 3),
+                border: Border.all(color: Color(0x29FFFFFF)),
                 boxShadow: const [
-                  BoxShadow(color: ComicColors.black, offset: Offset(4, 4), blurRadius: 0),
+                  BoxShadow(color: Color(0x59000000), offset: Offset(0, 10), blurRadius: 24),
                 ],
               ),
               child: Row(
@@ -206,7 +206,7 @@ class _CreateRoomScreenState extends ConsumerState<CreateRoomScreen> {
             const SizedBox(height: 20),
             const Text('ظهور الغرفة',
                 style: TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.w900, color: ComicColors.black)),
+                    fontSize: 20, fontWeight: FontWeight.w900, color: ComicColors.light)),
             const SizedBox(height: 12),
             Row(
               children: [
@@ -284,14 +284,11 @@ class _VisibilityOption extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         decoration: BoxDecoration(
           color: selected ? ComicColors.yellow : ComicColors.white,
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: ComicColors.black, width: selected ? 3 : 2),
-          boxShadow: selected
-              ? const [
-                  BoxShadow(
-                      color: ComicColors.black, offset: Offset(3, 3), blurRadius: 0),
-                ]
-              : null,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Color(0x29FFFFFF), width: selected ? 3 : 2),
+          boxShadow: const [
+            BoxShadow(color: Color(0x59000000), offset: Offset(0, 10), blurRadius: 24),
+          ],
         ),
         child: Row(
           children: [
@@ -351,7 +348,7 @@ class _StepperButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: enabled ? ComicColors.yellow : ComicColors.cream,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: ComicColors.black, width: 2.5),
+          border: Border.all(color: Color(0x29FFFFFF)),
         ),
         child: XoIcon(icon,
             size: 24,
@@ -380,7 +377,7 @@ class _CategoryTile extends StatelessWidget {
             decoration: BoxDecoration(
               color: category.color.withValues(alpha: selected ? 1 : 0.14),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: ComicColors.black, width: 2),
+              border: Border.all(color: Color(0x29FFFFFF)),
             ),
             child: XoIcon(category.icon,
                 color: selected ? Colors.white : category.color, size: 22),
@@ -428,7 +425,7 @@ class WaitingRoomScreen extends ConsumerWidget {
         child: Center(
           child: Text('خطأ: $e',
               style: const TextStyle(
-                  color: ComicColors.black, fontWeight: FontWeight.w800)),
+                  color: ComicColors.light, fontWeight: FontWeight.w800)),
         ),
       ),
       data: (session) {
@@ -445,7 +442,7 @@ class WaitingRoomScreen extends ConsumerWidget {
                   Text('جاري تجهيز الغرفة...',
                       style: TextStyle(
                           fontWeight: FontWeight.w900,
-                          color: ComicColors.black,
+                          color: ComicColors.light,
                           fontSize: 17)),
                 ],
               ),
@@ -464,7 +461,7 @@ class WaitingRoomScreen extends ConsumerWidget {
                         decoration: BoxDecoration(
                           color: ComicColors.red,
                           shape: BoxShape.circle,
-                          border: Border.all(color: ComicColors.black, width: 3),
+                          border: Border.all(color: Color(0x29FFFFFF)),
                         ),
                         child: const XoIcon('x', color: Colors.white, size: 32),
                       ),
@@ -561,7 +558,7 @@ class WaitingRoomScreen extends ConsumerWidget {
                                   color: ComicColors.blue,
                                   borderRadius: BorderRadius.circular(12),
                                   border:
-                                      Border.all(color: ComicColors.black, width: 2.5),
+                                      Border.all(color: Color(0x29FFFFFF)),
                                 ),
                                 child: const XoIcon('copy',
                                     size: 20, color: Colors.white),
@@ -582,7 +579,7 @@ class WaitingRoomScreen extends ConsumerWidget {
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w900,
-                            color: ComicColors.black)),
+                            color: ComicColors.light)),
                     const Spacer(),
                     Container(
                       padding:
@@ -590,7 +587,7 @@ class WaitingRoomScreen extends ConsumerWidget {
                       decoration: BoxDecoration(
                         color: ComicColors.yellow,
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: ComicColors.black, width: 2),
+                        border: Border.all(color: Color(0x29FFFFFF)),
                       ),
                       child: Text('${session.players.length} / ${session.maxPlayers}',
                           style: const TextStyle(
@@ -718,6 +715,7 @@ class _ComicScaffold extends StatelessWidget {
     return Scaffold(
       backgroundColor: ComicColors.cream,
       appBar: AppBar(
+        backgroundColor: ComicColors.ink,
         automaticallyImplyLeading: showBack,
         title: Text('$emoji $title'),
         actions: actions,

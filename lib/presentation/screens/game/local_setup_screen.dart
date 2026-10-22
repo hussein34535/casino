@@ -123,11 +123,11 @@ class _LocalSetupScreenState extends ConsumerState<LocalSetupScreen> {
     return Scaffold(
       backgroundColor: ComicColors.cream,
       appBar: AppBar(
-        backgroundColor: ComicColors.green,
+        backgroundColor: ComicColors.ink,
         elevation: 0,
         title: const Text('👥 تجهيز اللعب المحلي',
             style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white, fontSize: 20)),
-        shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+        shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
       ),
       body: ComicBackground(
         bgColor: ComicColors.cream,
@@ -139,7 +139,7 @@ class _LocalSetupScreenState extends ConsumerState<LocalSetupScreen> {
             children: [
               // Game Type Selection
               const Text('🎮 اختر نوع اللعبة',
-                  style: TextStyle(fontWeight: FontWeight.w900, color: ComicColors.black, fontSize: 18)),
+                  style: TextStyle(fontWeight: FontWeight.w900, color: ComicColors.light, fontSize: 18)),
               const SizedBox(height: 12),
               SizedBox(
                 height: 100,
@@ -259,12 +259,12 @@ class _LocalSetupScreenState extends ConsumerState<LocalSetupScreen> {
                 const SizedBox(height: 12),
                 const Row(
                   children: [
-                    XoIcon('zap', size: 18, color: ComicColors.black),
+                    XoIcon('zap', size: 18, color: ComicColors.light),
                     SizedBox(width: 6),
                     Text('صعوبة البوت',
                         style: TextStyle(
                             fontWeight: FontWeight.w900,
-                            color: ComicColors.black,
+                            color: ComicColors.light,
                             fontSize: 16)),
                   ],
                 ),
@@ -318,12 +318,12 @@ class _LocalSetupScreenState extends ConsumerState<LocalSetupScreen> {
                 children: [
                   const Row(
                     children: [
-                      XoIcon('users', size: 20, color: ComicColors.black),
+                      XoIcon('users', size: 20, color: ComicColors.light),
                       SizedBox(width: 6),
                       Text('أسماء اللاعبين',
                           style: TextStyle(
                               fontWeight: FontWeight.w900,
-                              color: ComicColors.black,
+                              color: ComicColors.light,
                               fontSize: 18)),
                     ],
                   ),
@@ -370,8 +370,8 @@ class _LocalSetupScreenState extends ConsumerState<LocalSetupScreen> {
                             decoration: BoxDecoration(
                               color: ComicColors.red,
                               shape: BoxShape.circle,
-                              border: Border.all(color: ComicColors.black, width: 2),
-                              boxShadow: const [BoxShadow(color: ComicColors.black, offset: Offset(2, 2))],
+                              border: Border.all(color: Color(0x29FFFFFF)),
+                              boxShadow: const [BoxShadow(color: Color(0x59000000), offset: Offset(0, 10), blurRadius: 24)],
                             ),
                             child: const Icon(Icons.delete_rounded, color: Colors.white, size: 20),
                           ),

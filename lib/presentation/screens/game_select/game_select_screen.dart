@@ -27,10 +27,10 @@ class GameSelectScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: ComicColors.cream,
       appBar: AppBar(
-        backgroundColor: ComicColors.purple,
+        backgroundColor: ComicColors.ink,
         elevation: 0,
         title: const Text('🎯 اختر فئة الأسئلة', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white, fontSize: 20)),
-        shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+        shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
         actions: [
           if (isChangingType)
             Padding(

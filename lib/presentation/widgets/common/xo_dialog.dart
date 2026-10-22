@@ -5,7 +5,7 @@ import 'package:game_show_app/core/widgets/premium_widgets.dart';
 class XoDialog {
   static const _shape = RoundedRectangleBorder(
     borderRadius: BorderRadius.all(Radius.circular(24)),
-    side: BorderSide(color: ComicColors.black, width: 4),
+    side: BorderSide(color: Color(0x24FFFFFF)),
   );
 
   static Future<bool?> confirm(
@@ -22,8 +22,8 @@ class XoDialog {
       builder: (ctx) => AlertDialog(
         backgroundColor: ComicColors.cream,
         shape: _shape,
-        title: Text(title, style: const TextStyle(color: ComicColors.black, fontWeight: FontWeight.w900)),
-        content: Text(message, style: const TextStyle(color: ComicColors.black)),
+        title: Text(title, style: const TextStyle(color: ComicColors.light, fontWeight: FontWeight.w900)),
+        content: Text(message, style: const TextStyle(color: ComicColors.light)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
@@ -57,14 +57,14 @@ class XoDialog {
       builder: (ctx) => AlertDialog(
         backgroundColor: ComicColors.cream,
         shape: _shape,
-        title: Text(title, style: const TextStyle(color: ComicColors.black, fontWeight: FontWeight.w900)),
+        title: Text(title, style: const TextStyle(color: ComicColors.light, fontWeight: FontWeight.w900)),
         content: TextField(
           controller: controller,
           decoration: InputDecoration(
             hintText: hintText,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
-              borderSide: const BorderSide(color: ComicColors.black, width: 2.5),
+              borderSide: const BorderSide(color: Color(0x24FFFFFF)),
             ),
           ),
           autofocus: true,
@@ -96,8 +96,8 @@ class XoDialog {
       builder: (ctx) => AlertDialog(
         backgroundColor: ComicColors.cream,
         shape: _shape,
-        title: Text(title, style: const TextStyle(color: ComicColors.black, fontWeight: FontWeight.w900)),
-        content: Text(message, style: const TextStyle(color: ComicColors.black)),
+        title: Text(title, style: const TextStyle(color: ComicColors.light, fontWeight: FontWeight.w900)),
+        content: Text(message, style: const TextStyle(color: ComicColors.light)),
         actions: [
           if (actionLabel != null)
             ElevatedButton(

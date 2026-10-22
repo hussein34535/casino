@@ -19,10 +19,10 @@ class ProfileScreen extends ConsumerWidget {
       return Scaffold(
         backgroundColor: ComicColors.cream,
         appBar: AppBar(
-          backgroundColor: ComicColors.blue,
+          backgroundColor: ComicColors.ink,
           elevation: 0,
           title: const Text('👤 الملف الشخصي', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white)),
-          shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+          shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
         ),
         body: ComicBackground(
           child: Center(
@@ -58,10 +58,10 @@ class ProfileScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: ComicColors.cream,
       appBar: AppBar(
-        backgroundColor: ComicColors.blue,
+        backgroundColor: ComicColors.ink,
         elevation: 0,
         title: const Text('👤 الملف الشخصي', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white, fontSize: 20)),
-        shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+        shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 12),
@@ -93,8 +93,8 @@ class ProfileScreen extends ConsumerWidget {
                           decoration: BoxDecoration(
                             color: Colors.white,
                             shape: BoxShape.circle,
-                            border: Border.all(color: ComicColors.black, width: 3),
-                            boxShadow: const [BoxShadow(color: ComicColors.black, offset: Offset(3, 3), blurRadius: 0)],
+                            border: Border.all(color: Color(0x29FFFFFF)),
+                            boxShadow: const [BoxShadow(color: Color(0x59000000), offset: Offset(0, 10), blurRadius: 24)],
                           ),
                           child: ClipOval(
                             child: user.photoUrl != null
@@ -166,12 +166,12 @@ class ProfileScreen extends ConsumerWidget {
                 child: Column(
                   children: [
                     _MenuTile(emoji: '⚙️', label: 'الإعدادات', onTap: () => context.push('/settings')),
-                    const Divider(color: ComicColors.black, thickness: 1.5),
+                    const Divider(color: Color(0x14000000), thickness: 1),
                     _MenuTile(emoji: '🏅', label: 'الإنجازات', onTap: () => context.push('/achievements')),
-                    const Divider(color: ComicColors.black, thickness: 1.5),
+                    const Divider(color: Color(0x14000000), thickness: 1),
                     _MenuTile(emoji: '👥', label: 'الأصدقاء', onTap: () => context.push('/friends')),
                     if (user.isAdmin) ...[
-                      const Divider(color: ComicColors.black, thickness: 1.5),
+                      const Divider(color: Color(0x14000000), thickness: 1),
                       _MenuTile(emoji: '🔐', label: 'لوحة المشرف', onTap: () => context.push('/admin'), color: ComicColors.red, textColor: Colors.white),
                     ],
                   ],
@@ -203,18 +203,18 @@ class ProfileScreen extends ConsumerWidget {
         backgroundColor: ComicColors.cream,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
-          side: const BorderSide(color: ComicColors.black, width: 3),
+          side: const BorderSide(color: Color(0x24FFFFFF)),
         ),
         title: const Text('✏️ تعديل الملف', textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.w900, color: ComicColors.black, fontSize: 20)),
+          style: TextStyle(fontWeight: FontWeight.w900, color: ComicColors.light, fontSize: 20)),
         content: TextField(
           controller: nameController,
-          style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: ComicColors.black),
+          style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: ComicColors.light),
           decoration: InputDecoration(
             labelText: 'اسم العرض',
             labelStyle: const TextStyle(color: ComicColors.blue, fontWeight: FontWeight.w900),
             filled: true, fillColor: Colors.white,
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: ComicColors.black, width: 2)),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0x24FFFFFF))),
             focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: ComicColors.blue, width: 2.5)),
           ),
         ),
@@ -226,7 +226,7 @@ class ProfileScreen extends ConsumerWidget {
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: ComicColors.blue,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: ComicColors.black, width: 2))),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0x24FFFFFF)))),
             onPressed: () async {
               final newName = nameController.text.trim();
               if (newName.isEmpty) return;

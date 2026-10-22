@@ -26,9 +26,9 @@ class _ShopScreenState extends ConsumerState<ShopScreen> {
     return Scaffold(
       backgroundColor: ComicColors.cream,
       appBar: AppBar(
-        backgroundColor: ComicColors.purple,
+        backgroundColor: ComicColors.ink,
         title: const Text('المتجر', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 20)),
-        shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+        shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
       ),
       body: Directionality(
         textDirection: TextDirection.rtl,
@@ -75,7 +75,7 @@ class _ShopScreenState extends ConsumerState<ShopScreen> {
               const SizedBox(height: 20),
               const Text(
                 'المميز',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: ComicColors.black),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: ComicColors.light),
               ),
               const SizedBox(height: 8),
               featuredAsync.when(
@@ -118,14 +118,20 @@ class _ShopScreenState extends ConsumerState<ShopScreen> {
                       },
                       selectedColor: ComicColors.yellow,
                       checkmarkColor: ComicColors.black,
-                      labelStyle: const TextStyle(
-                        color: ComicColors.black,
+                      labelStyle: TextStyle(
+                        color: isSelected ? ComicColors.ink : ComicColors.light,
                         fontWeight: FontWeight.w800,
                         fontSize: 13,
                       ),
-                      backgroundColor: ComicColors.white,
-                      side: const BorderSide(color: ComicColors.black, width: 2),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      backgroundColor: isSelected
+                          ? ComicColors.yellow
+                          : Colors.white.withValues(alpha: 0.10),
+                      side: BorderSide(
+                        color: isSelected
+                            ? ComicColors.yellow
+                            : Colors.white.withValues(alpha: 0.24),
+                      ),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
                     );
                   },
                 ),

@@ -83,12 +83,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           decoration: BoxDecoration(
                             color: ComicColors.yellow,
                             borderRadius: BorderRadius.circular(26),
-                            border: Border.all(color: ComicColors.black, width: 3),
+                            border: Border.all(color: Color(0x29FFFFFF)),
                             boxShadow: const [
                               BoxShadow(
-                                  color: ComicColors.black,
-                                  offset: Offset(4, 4),
-                                  blurRadius: 0),
+                                  color: Color(0x59000000),
+                                  offset: Offset(0, 8),
+                                  blurRadius: 20),
                             ],
                           ),
                           child: const XoIcon('gamepad2', size: 44, color: ComicColors.black),
@@ -158,7 +158,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       Row(
                         children: [
                           const Expanded(
-                              child: Divider(color: ComicColors.black)),
+                              child: Divider(color: Color(0x14000000))),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 14),
                             child: Text('أو',
@@ -168,7 +168,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                     color: ComicColors.grey)),
                           ),
                           const Expanded(
-                              child: Divider(color: ComicColors.black)),
+                              child: Divider(color: Color(0x14000000))),
                         ],
                       ),
                       const SizedBox(height: 18),
@@ -216,7 +216,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         backgroundColor: ComicColors.cream,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
-          side: const BorderSide(color: ComicColors.black, width: 4),
+          side: const BorderSide(color: Color(0x24FFFFFF)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(24),

@@ -24,7 +24,7 @@ class XoCard extends StatefulWidget {
     this.padding,
     this.margin,
     this.elevation,
-    this.borderRadius = 20,
+    this.borderRadius = 16,
     this.backgroundColor,
     this.borderColor,
     this.gradientColors,
@@ -40,12 +40,12 @@ class XoCard extends StatefulWidget {
     this.onLongPress,
     this.padding,
     this.margin,
-    this.borderRadius = 20,
+    this.borderRadius = 16,
     this.width,
     this.height,
   }) : elevation = 6,
        backgroundColor = null,
-       borderColor = ComicColors.black,
+       borderColor = null,
        gradientColors = [ComicColors.yellow.withValues(alpha: 0.15), ComicColors.orange.withValues(alpha: 0.08)],
        clipBehavior = Clip.antiAlias;
 
@@ -58,24 +58,51 @@ class _XoCardState extends State<XoCard> {
 
   @override
   Widget build(BuildContext context) {
+    final bg = widget.backgroundColor ?? ComicColors.white;
+    final radius = BorderRadius.circular(widget.borderRadius);
+
+    Widget child = widget.child;
+    if (widget.gradientColors != null) {
+      // Semi-transparent wash — must sit ON the solid base color, otherwise
+      // the dark stage shows through and dark labels break.
+      child = DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: widget.gradientColors!,
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: radius,
+        ),
+        child: child,
+      );
+    }
+
+    // Theme is dark: unstyled Text/Icon inside this (light) card needs a
+    // readable fallback; explicit colors still win.
+    final label = bg.computeLuminance() > 0.55 ? ComicColors.black : Colors.white;
+    child = IconTheme.merge(
+      data: IconThemeData(color: label),
+      child: DefaultTextStyle.merge(style: TextStyle(color: label), child: child),
+    );
+
     Widget card = Container(
       width: widget.width,
       height: widget.height,
       margin: widget.margin ?? const EdgeInsets.symmetric(vertical: 4),
       padding: widget.padding,
       decoration: BoxDecoration(
-        color: widget.backgroundColor ?? ComicColors.white,
-        borderRadius: BorderRadius.circular(widget.borderRadius),
-        border: Border.all(color: widget.borderColor ?? ComicColors.black, width: 3),
-        gradient: widget.gradientColors != null
-            ? LinearGradient(colors: widget.gradientColors!, begin: Alignment.topLeft, end: Alignment.bottomRight)
+        color: bg,
+        borderRadius: radius,
+        border: widget.borderColor != null
+            ? Border.all(color: widget.borderColor!, width: 3)
             : null,
         boxShadow: widget.elevation != null
-            ? const [BoxShadow(color: ComicColors.black, blurRadius: 0, offset: Offset(4, 4))]
+            ? const [BoxShadow(color: Color(0x59000000), offset: Offset(0, 10), blurRadius: 24)]
             : null,
       ),
       clipBehavior: widget.clipBehavior,
-      child: widget.child,
+      child: child,
     );
 
     if (widget.onTap != null || widget.onLongPress != null) {

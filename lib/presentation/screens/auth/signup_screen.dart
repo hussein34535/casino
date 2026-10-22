@@ -73,12 +73,12 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                           decoration: BoxDecoration(
                             color: ComicColors.green,
                             borderRadius: BorderRadius.circular(26),
-                            border: Border.all(color: ComicColors.black, width: 3),
+                            border: Border.all(color: Color(0x29FFFFFF)),
                             boxShadow: const [
                               BoxShadow(
-                                  color: ComicColors.black,
-                                  offset: Offset(4, 4),
-                                  blurRadius: 0),
+                                  color: Color(0x59000000),
+                                  offset: Offset(0, 8),
+                                  blurRadius: 20),
                             ],
                           ),
                           child: const XoIcon('sparkles', size: 44, color: ComicColors.black),

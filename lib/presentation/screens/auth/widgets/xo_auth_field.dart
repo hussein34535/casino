@@ -33,11 +33,11 @@ class XoAuthField extends StatelessWidget {
       controller: controller,
       obscureText: obscure,
       keyboardType: keyboard,
-      style: const TextStyle(fontWeight: FontWeight.w800, color: ComicColors.black),
+      style: const TextStyle(fontWeight: FontWeight.w800, color: ComicColors.light),
       decoration: InputDecoration(
         labelText: label,
         labelStyle: const TextStyle(
-            fontWeight: FontWeight.w800, color: ComicColors.black),
+            fontWeight: FontWeight.w800, color: ComicColors.light),
         prefixIcon: Icon(prefix, color: ComicColors.grey),
         suffixIcon: suffix,
         filled: true,

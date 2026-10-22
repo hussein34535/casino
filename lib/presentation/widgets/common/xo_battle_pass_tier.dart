@@ -54,7 +54,7 @@ class BattlePassTier extends StatelessWidget {
                   : isClaimed
                       ? ComicColors.green
                       : ComicColors.grey.withValues(alpha: 0.3),
-              border: Border.all(color: ComicColors.black, width: 2),
+              border: Border.all(color: Color(0x29FFFFFF)),
             ),
             child: Center(
               child: Text(

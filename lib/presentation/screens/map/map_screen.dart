@@ -20,10 +20,10 @@ class MapScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ComicColors.cream,
       appBar: AppBar(
-        backgroundColor: ComicColors.blue,
+        backgroundColor: ComicColors.ink,
         elevation: 0,
         title: const Text('🗺️ خريطة الألعاب', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white, fontSize: 20)),
-        shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+        shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
       ),
       body: ComicBackground(
         bgColor: ComicColors.cream,
@@ -93,8 +93,8 @@ class MapScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: ComicColors.blue,
                               shape: BoxShape.circle,
-                              border: Border.all(color: ComicColors.black, width: 2),
-                              boxShadow: const [BoxShadow(color: ComicColors.black, offset: Offset(2, 2), blurRadius: 0)],
+                              border: Border.all(color: Color(0x29FFFFFF)),
+                              boxShadow: const [BoxShadow(color: Color(0x59000000), offset: Offset(0, 10), blurRadius: 24)],
                             ),
                             child: const Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 18),
                           ),

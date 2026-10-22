@@ -16,9 +16,9 @@ class RewardsScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: ComicColors.cream,
       appBar: AppBar(
-        backgroundColor: ComicColors.blue,
+        backgroundColor: ComicColors.ink,
         title: const Text('المكافآت', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 20)),
-        shape: const Border(bottom: BorderSide(color: ComicColors.black, width: 3)),
+        shape: const Border(bottom: BorderSide(color: Color(0x24FFFFFF))),
       ),
       body: Directionality(
         textDirection: TextDirection.rtl,
@@ -89,7 +89,7 @@ class RewardsScreen extends ConsumerWidget {
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: ComicColors.black, width: 2),
+                          border: Border.all(color: Color(0x29FFFFFF)),
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(6),
@@ -115,7 +115,7 @@ class RewardsScreen extends ConsumerWidget {
                 const SizedBox(height: 24),
                 const Text(
                   'مكافآت المستويات',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: ComicColors.black),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: ComicColors.light),
                 ),
                 const SizedBox(height: 8),
                 ...levelRewards.map((reward) {
@@ -137,7 +137,7 @@ class RewardsScreen extends ConsumerWidget {
                             color: isUnlocked
                                 ? ComicColors.green.withValues(alpha: 0.2)
                                 : ComicColors.grey.withValues(alpha: 0.15),
-                            border: Border.all(color: ComicColors.black, width: 2),
+                            border: Border.all(color: Color(0x29FFFFFF)),
                           ),
                           child: Icon(
                             isUnlocked ? Icons.check_circle : Icons.lock,
@@ -174,14 +174,14 @@ class RewardsScreen extends ConsumerWidget {
                                 ? ComicColors.green
                                 : ComicColors.grey.withValues(alpha: 0.25),
                             borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: ComicColors.black, width: 2),
+                            border: Border.all(color: Color(0x29FFFFFF)),
                           ),
                           child: Text(
                             isUnlocked ? 'متاح' : 'مغلق',
                             style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w900,
-                              color: ComicColors.black,
+                              color: ComicColors.light,
                             ),
                           ),
                         ),

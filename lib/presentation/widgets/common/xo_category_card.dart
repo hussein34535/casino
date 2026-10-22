@@ -107,7 +107,7 @@ class XoCategoryCard extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: badgeColor ?? ComicColors.yellow,
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: ComicColors.black, width: 2),
+                          border: Border.all(color: Color(0x29FFFFFF)),
                         ),
                         child: Text(
                           badgeText!,
