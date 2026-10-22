@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>قوالب الواجهة | Xo Game Show</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F3F5; --surface:#FFFFFF; --ink:#16171B; --muted:#6B6F76;
+  --line:#E3E5E8; --accent:#16171B;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Cairo",system-ui,sans-serif;color:var(--ink);background:var(--bg);min-height:100vh;padding:48px 24px 80px}
+.wrap{max-width:1180px;margin:0 auto}
+
+.head{margin-bottom:44px}
+.head .eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.04em;color:var(--muted);border:1.5px solid var(--line);background:var(--surface);padding:6px 14px;border-radius:999px;margin-bottom:16px}
+.head h1{font-size:34px;font-weight:900;letter-spacing:-.01em;text-wrap:balance}
+.head p{margin-top:10px;font-size:15px;color:var(--muted);max-width:640px;line-height:1.7}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:26px}
+
+.card{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .18s ease,box-shadow .18s ease}
+.card:hover{border-color:#C9CCD1;box-shadow:0 14px 34px rgba(22,23,27,.08)}
+
+.preview{position:relative;height:250px;overflow:hidden;background:#DDDFE3;border-bottom:1.5px solid var(--line)}
+.preview iframe{position:absolute;top:0;right:0;width:1180px;height:880px;border:0;transform:scale(.288);transform-origin:top right;pointer-events:none}
+.preview a.hit{position:absolute;inset:0;z-index:2}
+
+.meta{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.meta .row{display:flex;align-items:center;gap:10px}
+.meta .idx{font-weight:900;font-size:13px;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;display:grid;place-items:center;flex:none}
+.meta h2{font-size:18px;font-weight:800}
+.meta .desc{font-size:13.5px;color:var(--muted);line-height:1.65}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+.tag{font-size:11.5px;font-weight:700;color:var(--muted);border:1.2px solid var(--line);padding:4px 10px;border-radius:999px}
+.open{margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-size:14px;font-weight:800;color:#fff;background:var(--ink);border:none;border-radius:11px;padding:12px 16px;cursor:pointer;text-decoration:none;transition:opacity .15s ease}
+.open:hover{opacity:.85}
+.open:focus-visible{outline:3px solid #16171B;outline-offset:2px}
+
+.foot{margin-top:48px;padding-top:22px;border-top:1.5px solid var(--line);font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.foot b{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="head">
+    <span class="eyebrow">Xo Game Show — مرحلة اختيار الاتجاه</span>
+    <h1>٥ قوالب واجهة… اختار واحد ونفّذه في التطبيق</h1>
+    <p>كل قالب يعرض نفس الشاشات الأربعة بالظبط (الرئيسية، رمز الانضمام، السؤال، النتيجة) بنفس المحتوى — عشان المقارنة تكون عادلة. اضغط على أي معاينة أو زر «افتح القالب» لتجربته بالحجم الكامل.</p>
+  </header>
+
+  <div class="grid">
+
+    <article class="card">
+      <div class="preview">
+        <iframe src="01-game-show.html" title="معاينة قالب مسرح اللعبة" loading="lazy" tabindex="-1"></iframe>
+        <a class="hit" href="01-game-show.html" aria-label="افتح قالب مسرح اللعبة"></a>
+      </div>
+      <div class="meta">
+        <div class="row"><span class="idx">١</span><h2>مسرح اللعبة</h2></div>
+        <p class="desc">استوديو تلفزيوني داكن بنيلي عميق، كشافات مسرح، وأرقام كبيرة بخط Lalezar الأصفر. إحساس برنامج مسابقات على الهواء.</p>
+        <div class="tags"><span class="tag">داكن</span><span class="tag">Lalezar</span><span class="tag">درامي</span><span class="tag">استوديو</span></div>
+        <a class="open" href="01-game-show.html">افتح القالب ←</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="preview">
+        <iframe src="02-candy-pop.html" title="معاينة قالب كاندي بوب" loading="lazy" tabindex="-1"></iframe>
+        <a class="hit" href="02-candy-pop.html" aria-label="افتح قالب كاندي بوب"></a>
+      </div>
+      <div class="meta">
+        <div class="row"><span class="idx">٢</span><h2>كاندي بوب</h2></div>
+        <p class="desc">بنفسجي وردي فاتح، أشكال حلوى بظلال ملوّنة سميكة وخط Baloo Bhaijaan المستدير. مرح وشبابي ومحبب للأطفال والكبار.</p>
+        <div class="tags"><span class="tag">فاتح</span><span class="tag">Baloo Bhaijaan</span><span class="tag">حلوى</span><span class="tag">مرح</span></div>
+        <a class="open" href="02-candy-pop.html">افتح القالب ←</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="preview">
+        <iframe src="03-clean-playful.html" title="معاينة قالب نظيف ومرح" loading="lazy" tabindex="-1"></iframe>
+        <a class="hit" href="03-clean-playful.html" aria-label="افتح قالب نظيف ومرح"></a>
+      </div>
+      <div class="meta">
+        <div class="row"><span class="idx">٣</span><h2>نظيف ومرح</h2></div>
+        <p class="desc">أبيض وإضاءة نهارية، أزرق حاد واحد مع مرجاني للتأكيد، وخط IBM Plex Sans Arabic. هادئ وسريع ومحترم للاستخدام اليومي.</p>
+        <div class="tags"><span class="tag">فاتح</span><span class="tag">IBM Plex Sans Arabic</span><span class="tag">مينيمال</span><span class="tag">واضح</span></div>
+        <a class="open" href="03-clean-playful.html">افتح القالب ←</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="preview">
+        <iframe src="04-neon-arcade.html" title="معاينة قالب أركيد نيون" loading="lazy" tabindex="-1"></iframe>
+        <a class="hit" href="04-neon-arcade.html" aria-label="افتح قالب أركيد نيون"></a>
+      </div>
+      <div class="meta">
+        <div class="row"><span class="idx">٤</span><h2>أركيد نيون</h2></div>
+        <p class="desc">شاشة أركيد غامقة بنيون سماوي وفوشيا، خطوط توهج، وأرقام بخط Press Start 2P البكسلات. إحساس صالات الألعاب الثمانينية.</p>
+        <div class="tags"><span class="tag">داكن</span><span class="tag">Tajawal + Press Start 2P</span><span class="tag">نيون</span><span class="tag">أركيد</span></div>
+        <a class="open" href="04-neon-arcade.html">افتح القالب ←</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="preview">
+        <iframe src="05-memphis-pop.html" title="معاينة قالب ممفيس بوب" loading="lazy" tabindex="-1"></iframe>
+        <a class="hit" href="05-memphis-pop.html" aria-label="افتح قالب ممفيس بوب"></a>
+      </div>
+      <div class="meta">
+        <div class="row"><span class="idx">٥</span><h2>ممفيس بوب</h2></div>
+        <p class="desc">فلات ديزاين ممفيس: كتل صفراء زرقاء حمراء، حدود سوداء سميكة، ظلال صلبة مزاحة، وخط Rubik. جريء ومرح وبلاستيكي المظهر.</p>
+        <div class="tags"><span class="tag">فاتح</span><span class="tag">Rubik</span><span class="tag">ممفيس</span><span class="tag">جريء</span></div>
+        <a class="open" href="05-memphis-pop.html">افتح القالب ←</a>
+      </div>
+    </article>
+
+  </div>
+
+  <footer class="foot">
+    <span><b>المعاينات حيّة</b> — كل كارت يحمّل القالب نفسه مصغّرًا.</span>
+    <span>اختر رقمك بالرد ونبدأ تحويل التطبيق عليه.</span>
+  </footer>
+
+</div>
+</body>
+</html>
